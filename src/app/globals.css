@@ -17,8 +17,91 @@
   }
 }
 
+/* Define the color variables */
+:root {
+  --primary-color: #5f63f2; /* Soft Purple (Primary Color) */
+  --hover-color: #42d3c2; /* Fresh Teal for hover effects */
+  --background-color: #f4f7fe; /* Light blue background for a soft touch */
+  --text-color: #212529; /* Dark text for readability */
+  --secondary-color: #6c757d; /* Subtle gray for secondary text */
+  --button-text-color: white; /* White text color for buttons */
+  --link-text-color: #5f63f2; /* Primary color for links */
+  --link-hover-color: #42d3c2; /* Hover color for links */
+  --list-item-hover-color: #5f63f2; /* List item hover color */
+}
+
+/* General Body Setup */
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  line-height: 1.6;
+}
+
+/* Paragraph Styles */
+p {
+  color: #333333; /* Dark gray text for paragraphs */
+  font-size: 16px;
+  margin: 20px 0;
+  line-height: 1.8;
+}
+
+/* Span Styles */
+span {
+  color: var(--primary-color);
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+span:hover {
+  color: var(--hover-color); /* Hover effect for spans */
+}
+
+/* Button Styles */
+button {
+  padding: 12px 25px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #4a54e1; /* Darker purple on hover */
+}
+
+/* Unordered List and List Item Styles */
+ul {
+  list-style-type: none;
+  padding-left: 0;
+  margin: 20px 0;
+}
+
+ul li {
+  color: var(--secondary-color); /* Secondary color for list items */
+  padding: 8px 0;
+  transition: color 0.3s ease;
+}
+
+ul li:hover {
+  color: var(--list-item-hover-color); /* Change color on hover */
+}
+
+/* Smooth transition for hover effects */
+a,
+button,
+ul li,
+span {
+  transition: all 0.3s ease;
+}
+
+.bannerBtn {
+  color: #fff !important;
+}
+
+.bannerBG {
+  background-color: #797de070;
 }
