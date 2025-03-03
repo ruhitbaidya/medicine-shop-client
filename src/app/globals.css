@@ -61,8 +61,10 @@ span:hover {
 }
 
 /* Button Styles */
-button {
+.btns {
   padding: 12px 25px;
+  background: var(--primary-color);
+  color: var(--button-text-color);
   border-radius: 5px;
   font-size: 16px;
   cursor: pointer;

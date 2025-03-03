@@ -12,7 +12,7 @@ const SearchField = () => {
               type="text"
               placeholder="Search By Category"
             />
-            <button className="absolute top-2 right-2">Search</button>
+            <button className="absolute top-2 right-2 btns">Search</button>
           </div>
         </div>
       </div>
