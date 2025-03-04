@@ -1,17 +1,25 @@
 "use client";
 import { Logout } from "@/components/getUser/logOutUser";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation"; // Import usePathname
 import { ReactNode, useState } from "react";
 import { FiMenu, FiHome, FiBarChart, FiUsers } from "react-icons/fi";
 
 export default function Dashboard({ children }: { children: ReactNode }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const router = useRouter();
+  const pathname = usePathname(); // Use usePathname to get the current path
+
   const handelLogout = async () => {
     await Logout();
     router.push("/login");
   };
+
+  // Function to check if the current route is active
+  const isActive = (path: string) => {
+    return pathname === path;
+  };
+
   return (
     <div className="flex h-screen bg-gray-100">
       {/* Sidebar */}
@@ -31,19 +39,31 @@ export default function Dashboard({ children }: { children: ReactNode }) {
         <nav className="space-y-4">
           <Link
             href="/admin/medicines"
-            className="flex items-center gap-2 p-2 rounded-lg hover:bg-gray-200"
+            className={`flex items-center gap-2 p-2 rounded-lg ${
+              isActive("/admin/medicines")
+                ? "bg-[#5f63f2] text-white"
+                : "hover:bg-gray-200"
+            }`}
           >
             <FiHome size={20} /> Medicine
           </Link>
           <Link
             href="/admin/orders"
-            className="flex items-center gap-2 p-2 rounded-lg hover:bg-gray-200"
+            className={`flex items-center gap-2 p-2 rounded-lg ${
+              isActive("/admin/orders")
+                ? "bg-[#5f63f2] text-white"
+                : "hover:bg-gray-200"
+            }`}
           >
             <FiBarChart size={20} /> Order
           </Link>
           <Link
             href="/admin/users"
-            className="flex items-center gap-2 p-2 rounded-lg hover:bg-gray-200"
+            className={`flex items-center gap-2 p-2 rounded-lg ${
+              isActive("/admin/users")
+                ? "bg-[#5f63f2] text-white"
+                : "hover:bg-gray-200"
+            }`}
           >
             <FiUsers size={20} /> Users
           </Link>

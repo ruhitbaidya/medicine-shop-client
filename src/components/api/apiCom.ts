@@ -1,7 +1,5 @@
-export const postApi = async (
-  url: string,
-  data: { email: string; phone?: string; password: string }
-) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const postApi = async (url: string, data: any) => {
   const res = await fetch(url, {
     method: "POST",
     headers: {
@@ -9,6 +7,12 @@ export const postApi = async (
     },
     body: JSON.stringify(data),
   });
+  const result = res.json();
+  return result;
+};
+
+export const getApi = async (url: string) => {
+  const res = await fetch(url);
   const result = res.json();
   return result;
 };
