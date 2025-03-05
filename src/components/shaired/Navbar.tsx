@@ -3,21 +3,18 @@ import Logo from "@/app/assets/logo/Logo";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { CiMenuFries } from "react-icons/ci";
-import { FaShoppingBag } from "react-icons/fa";
-import { RiLogoutCircleRLine } from "react-icons/ri";
 import { getUser } from "../getUser/userFound";
-import { useRouter } from "next/navigation";
-import { Logout } from "../getUser/logOutUser";
+import { usePathname } from "next/navigation"; // Add usePathname
+import CardProfile from "./CardProfile";
+
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const router = useRouter();
+
   const [user, setUser] = useState<{ email: string; role: string } | null>(
     null
   );
-  const handelLogout = async () => {
-    await Logout();
-    router.push("/login");
-  };
+  const pathname = usePathname(); // Get the current pathname
+
   const userFounder = async () => {
     const data = await getUser();
     setUser(data);
@@ -29,6 +26,11 @@ const Navbar = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  // Function to check if the current route is active
+  const isActive = (path: string) => {
+    return pathname === path;
+  };
+
   return (
     <nav className="bg-white shadow-md">
       <div className="container mx-auto px-4 py-[15px]">
@@ -37,12 +39,7 @@ const Navbar = () => {
             <Logo />
           </Link>
           <div className="md:hidden flex gap-[8px]">
-            <button className="btns">
-              <FaShoppingBag />
-            </button>
-            <button onClick={handelLogout} className="btns">
-              <RiLogoutCircleRLine />
-            </button>
+            <CardProfile />
           </div>
           <div className="md:hidden">
             <button
@@ -58,66 +55,72 @@ const Navbar = () => {
               <>
                 <Link
                   href="/shop"
-                  className="text-gray-700 hover:text-blue-600"
+                  className={`text-gray-700 hover:text-blue-600 ${
+                    isActive("/shop") ? "text-[#5f63f2] !important" : ""
+                  }`}
                 >
                   Shop
                 </Link>
                 <Link
                   href="/order"
-                  className="text-gray-700 hover:text-blue-600"
+                  className={`text-gray-700 hover:text-blue-600 ${
+                    isActive("/order") ? "text-[#5f63f2] !important" : ""
+                  }`}
                 >
                   Orders
                 </Link>
                 <Link
                   href="/profile"
-                  className="text-gray-700 hover:text-blue-600"
+                  className={`text-gray-700 hover:text-blue-600 ${
+                    isActive("/profile") ? "text-[#5f63f2] !important" : ""
+                  }`}
                 >
                   Profile
                 </Link>
                 <Link
                   href="/admin"
-                  className="text-gray-700 hover:text-blue-600"
+                  className={`text-gray-700 hover:text-blue-600 ${
+                    isActive("/admin") ? "text-[#5f63f2] !important" : ""
+                  }`}
                 >
                   Dashboard
                 </Link>
-                <button className="btns">
-                  <Link href="/card">
-                    <FaShoppingBag size={20} />
-                  </Link>
-                </button>
-                <button onClick={handelLogout} className="btns">
-                  <RiLogoutCircleRLine size={20} />
-                </button>
+                <CardProfile />
               </>
             ) : (
               <>
                 <Link
                   href="/shop"
-                  className="text-gray-700 hover:text-blue-600"
+                  className={`text-gray-700 hover:text-blue-600 ${
+                    isActive("/shop") ? "text-[#5f63f2] !important" : ""
+                  }`}
                 >
                   Shop
                 </Link>
                 <Link
                   href="/order"
-                  className="text-gray-700 hover:text-blue-600"
+                  className={`text-gray-700 hover:text-blue-600 ${
+                    isActive("/order") ? "text-[#5f63f2] !important" : ""
+                  }`}
                 >
                   Orders
                 </Link>
                 <Link
                   href="/profile"
-                  className="text-gray-700 hover:text-blue-600"
+                  className={`text-gray-700 hover:text-blue-600 ${
+                    isActive("/profile") ? "text-[#5f63f2] !important" : ""
+                  }`}
                 >
                   Profile
                 </Link>
+                <Link
+                  href="/login"
+                  className="text-gray-700 hover:text-blue-600"
+                >
+                  Login
+                </Link>
 
-                <button className="btns">
-                  <Link href="/card">
-                    <FaShoppingBag size={20} />
-                  </Link>
-                </button>
-                <button onClick={handelLogout} className="btns">
-                  <RiLogoutCircleRLine size={20} />
-                </button>
+                <CardProfile />
               </>
             )}
           </div>
@@ -126,7 +129,12 @@ const Navbar = () => {
         {isMenuOpen && (
           <div className="md:hidden">
             <div className="flex flex-col space-y-4 mt-4 pb-4">
-              <Link href="/shop" className="text-gray-700 hover:text-blue-600">
+              <Link
+                href="/shop"
+                className={`text-gray-700 hover:text-blue-600 ${
+                  isActive("/shop") ? "text-[#5f63f2] !important" : ""
+                }`}
+              >
                 Shop
               </Link>
               <Link href="/cart" className="text-gray-700 hover:text-blue-600">
@@ -134,13 +142,17 @@ const Navbar = () => {
               </Link>
               <Link
                 href="/orders"
-                className="text-gray-700 hover:text-blue-600"
+                className={`text-gray-700 hover:text-blue-600 ${
+                  isActive("/orders") ? "text-[#5f63f2] !important" : ""
+                }`}
               >
                 Orders
               </Link>
               <Link
                 href="/profile"
-                className="text-gray-700 hover:text-blue-600"
+                className={`text-gray-700 hover:text-blue-600 ${
+                  isActive("/profile") ? "text-[#5f63f2] !important" : ""
+                }`}
               >
                 Profile
               </Link>

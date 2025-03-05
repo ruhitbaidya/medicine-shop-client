@@ -1,52 +1,42 @@
 "use client";
-import { useState } from "react";
-import Image from "next/image";
-
-interface CartItem {
-  id: string;
-  name: string;
-  price: number;
-  quantity: number;
-  image: string;
-}
-
-const CartPage: React.FC = () => {
-  const [cart, setCart] = useState<CartItem[]>([
-    {
-      id: "1",
-      name: "Paracetamol",
-      price: 10.99,
-      quantity: 2,
-      image: "https://via.placeholder.com/150",
-    },
-    {
-      id: "2",
-      name: "Ibuprofen",
-      price: 15.49,
-      quantity: 1,
-      image: "https://via.placeholder.com/150",
-    },
-  ]);
-
+import { useContext } from "react";
+import { ContextCreate } from "@/Context/ContextProvide";
+import { FaBangladeshiTakaSign } from "react-icons/fa6";
+import Link from "next/link";
+import { TCardFor } from "@/app/types/medicinestype";
+import { FaPlus } from "react-icons/fa";
+import { FaMinus } from "react-icons/fa";
+const CartPage = () => {
+  const { card, setCard, setCount } = useContext(ContextCreate);
+  console.log(card);
   const handleQuantityChange = (id: string, value: number) => {
-    setCart((prev) =>
+    setCard((prev) =>
       prev.map((item) =>
-        item.id === id ? { ...item, quantity: item.quantity + value } : item
+        item._id === id
+          ? {
+              ...item,
+              quantity: Math.max(1, (item.quantity ?? 1) + value), // Ensure quantity is never less than 1
+            }
+          : item
       )
     );
   };
 
   const handleRemoveItem = (id: string) => {
-    setCart((prev) => prev.filter((item) => item.id !== id));
+    setCard((prev: TCardFor[]) =>
+      prev.filter((item: TCardFor) => item._id !== id)
+    );
   };
 
   const handleProceedToCheckout = () => {
-    // Here, you can implement the checkout functionality or redirect to the checkout page
-    console.log("Proceeding to checkout...");
+    setCount(calculateTotal());
   };
 
   const calculateTotal = () => {
-    return cart.reduce((total, item) => total + item.price * item.quantity, 0);
+    return card.reduce(
+      (total, item) => total + (item.price as number) * (item.quantity ?? 1), // Default quantity to 1 if undefined
+      0
+    );
   };
 
   return (
@@ -55,71 +45,74 @@ const CartPage: React.FC = () => {
         Your Cart
       </h1>
 
-      {cart.length === 0 ? (
+      {card.length === 0 ? (
         <div className="text-center text-xl text-gray-600">
           Your cart is empty!
         </div>
       ) : (
         <div className="overflow-x-auto">
-          <table className="min-w-full bg-white border border-gray-300 rounded-lg shadow-lg">
+          <table className="min-w-full text-center bg-white border border-gray-300 rounded-lg shadow-lg">
             <thead>
               <tr>
-                <th className="py-4 px-6 border-b text-left text-[var(--primary-color)]">
+                <th className="py-4 px-6 border-b  text-[var(--primary-color)]">
                   Product
                 </th>
-                <th className="py-4 px-6 border-b text-left text-[var(--primary-color)]">
+                <th className="py-4 px-6 border-b  text-[var(--primary-color)]">
                   Price
                 </th>
-                <th className="py-4 px-6 border-b text-left text-[var(--primary-color)]">
+                <th className="py-4 px-6 border-b  text-[var(--primary-color)]">
                   Quantity
                 </th>
-                <th className="py-4 px-6 border-b text-left text-[var(--primary-color)]">
+                <th className="py-4 px-6 border-b  text-[var(--primary-color)]">
                   Total
                 </th>
-                <th className="py-4 px-6 border-b text-left text-[var(--primary-color)]">
+                <th className="py-4 px-6 border-b text-[var(--primary-color)]">
                   Actions
                 </th>
               </tr>
             </thead>
             <tbody>
-              {cart.map((item) => (
-                <tr key={item.id} className="border-b hover:bg-gray-100">
-                  <td className="py-4 px-6 flex items-center gap-4">
-                    <Image
-                      src={item.image}
-                      alt={item.name}
-                      width={60}
-                      height={60}
-                      className="object-cover rounded-md"
-                    />
-                    <span className="text-lg">{item.name}</span>
+              {card.map((item) => (
+                <tr key={item._id} className="border-b hover:bg-gray-100">
+                  <td className="py-4 px-6 gap-4">
+                    <span className="text-lg text-center">{item.name}</span>
                   </td>
-                  <td className="py-4 px-6 text-lg">${item.price}</td>
+                  <td className="py-4 px-6 text-lg gap-[10px]">
+                    <div className="flex justify-center items-center gap-[10px]">
+                      <FaBangladeshiTakaSign size={15} />
+                      <p>{item.price}</p>
+                    </div>
+                  </td>
                   <td className="py-4 px-6 text-lg">
                     <div className="flex gap-2 items-center justify-center">
                       <button
-                        className="bg-gray-200 p-2 rounded-lg text-xl"
-                        onClick={() => handleQuantityChange(item.id, -1)}
-                        disabled={item.quantity === 1}
+                        className="bg-gray-200 w-[40px] flex justify-center items-center h-[40px] p-2 rounded-full text-xl"
+                        onClick={() =>
+                          handleQuantityChange(item._id as string, -1)
+                        }
+                        disabled={item.quantity === 1} // Disable if quantity is 1
                       >
-                        -
+                        <FaMinus size={15} />
                       </button>
-                      <span className="text-xl">{item.quantity}</span>
+                      <span className="text-xl">{item.quantity ?? 1}</span>
                       <button
-                        className="bg-gray-200 p-2 rounded-lg text-xl"
-                        onClick={() => handleQuantityChange(item.id, 1)}
+                        className="bg-gray-200 w-[40px] flex justify-center items-center h-[40px] p-2 rounded-full text-xl"
+                        onClick={() =>
+                          handleQuantityChange(item._id as string, 1)
+                        }
                       >
-                        +
+                        <FaPlus size={15} />
                       </button>
                     </div>
                   </td>
                   <td className="py-4 px-6 text-lg">
-                    ${(item.price * item.quantity).toFixed(2)}
+                    $
+                    {((item.price as number) * (item.quantity ?? 1)).toFixed(2)}
                   </td>
                   <td className="py-4 px-6 text-lg">
                     <button
-                      className="text-red-500 text-lg"
-                      onClick={() => handleRemoveItem(item.id)}
+                      className="text-red-500 text-lg px-[15px] py-[8px]"
+                      onClick={() => handleRemoveItem(item._id as string)}
                     >
                       Remove
                     </button>
@@ -141,12 +134,14 @@ const CartPage: React.FC = () => {
 
           {/* Proceed to Checkout Button */}
           <div className="mt-6 flex justify-end">
-            <button
-              onClick={handleProceedToCheckout}
-              className="bg-[var(--primary-color)] text-white py-3 px-8 rounded-lg text-xl shadow-lg hover:bg-[#4a54e1] transition"
-            >
-              Proceed to Checkout
-            </button>
+            <Link href="/checkout">
+              <button
+                onClick={handleProceedToCheckout}
+                className="bg-[var(--primary-color)] text-white py-3 px-8 rounded-lg text-xl shadow-lg hover:bg-[#4a54e1] transition"
+              >
+                Proceed to Checkout
+              </button>
+            </Link>
           </div>
         </div>
       )}

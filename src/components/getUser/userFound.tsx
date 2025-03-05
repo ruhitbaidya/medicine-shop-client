@@ -2,10 +2,8 @@
 "use server";
 import { cookies } from "next/headers";
 import { jwtDecode } from "jwt-decode";
-type TUserIn = {
-  email: string;
-  role: string;
-};
+import { TUserIn } from "@/app/types/medicinestype";
+
 export const getUser = async () => {
   const cookier = cookies();
   const cookie = (await cookier).get("authToken");
@@ -14,7 +12,7 @@ export const getUser = async () => {
   }
 
   try {
-    const user = jwtDecode<TUserIn>(cookie.value);
+    const user = jwtDecode<TUserIn | null>(cookie.value);
     return user;
   } catch (error) {
     throw new Error("Invalid token");

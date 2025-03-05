@@ -1,39 +1,23 @@
 "use client";
-import Image from "next/image";
+import { MedicineFormData } from "@/app/types/medicinestype";
+import { getApi } from "@/components/api/apiCom";
 import Link from "next/link";
-
-const featuredMedicines = [
-  {
-    id: 1,
-    name: "Pain Relief Capsules",
-    price: "$12.99",
-    image:
-      "https://png.pngtree.com/png-clipart/20241216/original/pngtree-medicine-and-drug-health-tablet-isolated-on-transparent-background-png-image_17920907.png",
-  },
-  {
-    id: 2,
-    name: "Vitamin Supplements",
-    price: "$9.99",
-    image:
-      "https://png.pngtree.com/png-clipart/20240319/original/pngtree-3d-illustration-pills-and-medicine-bottles-suitable-for-medical-png-image_14626674.png",
-  },
-  {
-    id: 3,
-    name: "Cough Syrup",
-    price: "$7.99",
-    image:
-      "https://png.pngtree.com/png-clipart/20240321/original/pngtree-3d-illustration-of-medicine-guide-capsule-png-image_14640448.png",
-  },
-  {
-    id: 4,
-    name: "Antibiotic Tablets",
-    price: "$14.50",
-    image:
-      "https://png.pngtree.com/png-clipart/20231016/original/pngtree-medical-pill-capsule-cutout-png-file-png-image_13320362.png",
-  },
-];
-
+import { useEffect, useState } from "react";
+import { FaBangladeshiTakaSign } from "react-icons/fa6";
 const ShopOverview = () => {
+  const [loading, setLoading] = useState(false);
+  const [medicine, setMedicine] = useState<MedicineFormData[] | []>([]);
+  const getMedicine = async () => {
+    const res = await getApi(`${process.env.NEXT_PUBLIC_API_URL}/get-medicine`);
+    setMedicine(res?.data);
+    if (res.data) {
+      setLoading(false);
+    }
+  };
+  useEffect(() => {
+    setLoading(true);
+    getMedicine();
+  }, []);
   return (
     <section className="py-12 bg-[var(--background-color)]">
       <div className="container mx-auto px-6">
@@ -48,35 +32,40 @@ const ShopOverview = () => {
         </div>
 
         {/* Featured Medicines Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-          {featuredMedicines.map((medicine) => (
-            <div
-              key={medicine.id}
-              className="bg-white p-5 rounded-lg shadow-md hover:shadow-xl transition transform hover:-translate-y-2"
-            >
-              <div className="flex justify-center">
-                <Image
-                  src={medicine.image}
-                  width={150}
-                  height={150}
-                  alt={medicine.name}
-                  className="rounded-md"
-                />
-              </div>
-              <h3 className="text-xl font-semibold text-[var(--text-color)] mt-4">
-                {medicine.name}
-              </h3>
-              <p className="text-[var(--primary-color)] font-bold mt-2">
-                {medicine.price}
-              </p>
-              <Link
-                href={`/shop/${medicine.id}`}
-                className="block mt-4 text-center bg-[var(--primary-color)] text-white py-2 rounded-md hover:bg-[var(--hover-color)] hover:text-white transition"
-              >
-                View Details
-              </Link>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8">
+          {loading && (
+            <div>
+              <p className="text-center">Loading.......</p>
             </div>
-          ))}
+          )}
+          {medicine ? (
+            medicine?.splice(0, 9)?.map((medicine) => (
+              <div
+                key={medicine._id}
+                className="bg-white p-5 rounded-lg shadow-md hover:shadow-xl transition transform hover:-translate-y-2"
+              >
+                <h3 className="text-xl font-semibold text-[var(--text-color)] mt-4">
+                  {medicine?.name}
+                </h3>
+                <p className="text-[var(--primary-color)] font-bold mt-2 flex items-center gap-[5px]">
+                  <FaBangladeshiTakaSign />
+                  {medicine?.price}
+                </p>
+                <Link
+                  href={`/shop/${medicine?._id}`}
+                  className="block mt-4 text-center bg-[var(--primary-color)] text-white py-2 rounded-md hover:bg-[var(--hover-color)] hover:text-white transition"
+                >
+                  View Details
+                </Link>
+              </div>
+            ))
+          ) : (
+            <>
+              <div>
+                <p className="text-center">Loading.......</p>
+              </div>
+            </>
+          )}
         </div>
 
         {/* View More Button */}
@@ -85,7 +74,7 @@ const ShopOverview = () => {
             href="/shop"
             className="px-6 py-3 bg-[var(--primary-color)] text-white rounded-lg text-lg font-semibold hover:bg-[var(--hover-color)] transition"
           >
-            Browse All Products
+            Browse All Medicine
           </Link>
         </div>
       </div>

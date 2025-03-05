@@ -1,16 +1,26 @@
 "use client";
 
-import { getApi } from "@/components/api/apiCom";
+import { deleteApi, getApi } from "@/components/api/apiCom";
 import { useEffect, useState } from "react";
 import { MedicineFormData } from "../addmedicine/AddMedicine";
-
+import UpdateMedicineModal from "../addmedicine/UpdateMedicneModal";
+import { MdDelete } from "react-icons/md";
+import { toast } from "sonner";
 export default function MedicineTable() {
   const [medicines, setMedicine] = useState<MedicineFormData[] | []>([]);
   const dataGets = async () => {
     const res = await getApi(`${process.env.NEXT_PUBLIC_API_URL}/get-medicine`);
     setMedicine(res?.data);
   };
-
+  const handelDelete = async (id: string | undefined) => {
+    const result = await deleteApi(
+      `${process.env.NEXT_PUBLIC_API_URL}/delete-medicne/${id}`
+    );
+    setMedicine(medicines.filter((item) => item._id !== id));
+    if (result.data.deletedCount > 0) {
+      toast.success(result.message);
+    }
+  };
   useEffect(() => {
     dataGets();
   }, []);
@@ -59,22 +69,21 @@ export default function MedicineTable() {
                   <p className="font-medium">
                     {medicine.manufacturer_details.name}
                   </p>
-                  <p className="text-gray-600">
-                    {medicine.manufacturer_details.address}
-                  </p>
-                  <p className="text-gray-600">
-                    {medicine.manufacturer_details.contact}
-                  </p>
                 </div>
               </td>
               <td className="px-6 py-4 text-sm text-gray-800">
                 {medicine.expiry_date}
               </td>
-              <td className="px-6 py-4 text-sm text-gray-800">
-                <button className="btns w-full mb-[10px]">Update</button>
-                <button className="py-[12px] rounded-lg bg-red-400 w-full mb-[10px]">
-                  Delete
-                </button>
+              <td className="px-6 py-4 text-sm text-gray-800 flex justify-between items-center">
+                <div className="flex justify-between items-center gap-[10px]">
+                  <UpdateMedicineModal id={medicine._id} />
+                  <button
+                    onClick={() => handelDelete(medicine?._id)}
+                    className="py-[8px] px-[15px] text-white rounded-lg bg-red-400"
+                  >
+                    <MdDelete size={20} />
+                  </button>
+                </div>
               </td>
             </tr>
           ))}

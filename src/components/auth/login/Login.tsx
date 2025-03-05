@@ -40,7 +40,7 @@ const Login = () => {
     <div>
       <div className="bg-gray-200">
         <div className="container mx-auto">
-          <div className="h-screen flex justify-center items-center border">
+          <div className="h-screen flex justify-center items-center">
             <div className="bg-gray-100 p-[50px] rounded-lg w-[95%] lg:w-[50%] mx-uato">
               <div>
                 <p className="text-left">Please Enter Your Details</p>

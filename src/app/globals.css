@@ -51,7 +51,6 @@ p {
 
 /* Span Styles */
 span {
-  color: var(--primary-color);
   font-weight: bold;
   transition: color 0.3s ease;
 }
@@ -93,7 +92,6 @@ ul li:hover {
 }
 
 /* Smooth transition for hover effects */
-a,
 button,
 ul li,
 span {

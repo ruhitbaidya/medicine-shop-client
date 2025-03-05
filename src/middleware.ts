@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getUser } from "./components/getUser/userFound";
 
 const authRoutes = ["/login", "/register"];
-const openRoutes = ["/checkout", "/profile", "/order"];
+const openRoutes = ["/checkout", "/profile", "/order", , "/payment"];
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
@@ -38,5 +38,12 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/admin/:path*", "/checkout", "/profile", "/order"],
+  matcher: [
+    "/admin/:path*",
+    "/checkout",
+    "/profile",
+    "/order",
+    "/payment",
+    "/payment/:path*",
+  ],
 };

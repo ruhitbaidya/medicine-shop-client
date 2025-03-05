@@ -3,7 +3,9 @@ const SearchField = () => {
     <div className="py-[60px]">
       <div className="container mx-auto px-[10px]">
         <div>
-          <h2 className="text-center text-black">Search Your Medicine</h2>
+          <h2 className="text-center text-3xl mb-[20px] font-bold text-black">
+            Search Your Medicine
+          </h2>
         </div>
         <div className="w-[100%] lg:w-[60%] mx-auto">
           <div className="relative">

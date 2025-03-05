@@ -1,5 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
-import { postApi } from "@/components/api/apiCom";
+import { getApi, patchApi } from "@/components/api/apiCom";
+import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "sonner";
 
@@ -10,7 +12,6 @@ export interface ManufacturerDetails {
 }
 
 export interface MedicineFormData {
-  _id?: string;
   name: string;
   description: string;
   price: number;
@@ -20,24 +21,66 @@ export interface MedicineFormData {
   expiry_date: string;
 }
 
-const MedicineForm = () => {
+const UpdateMedicineForm = ({ id }: { id: string | null | undefined }) => {
+  const [siData, setSiData] = useState<MedicineFormData | null>(null);
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors },
+    reset, // Use reset to update the form's default values
   } = useForm<MedicineFormData>();
+
+  // Fetch data for the specific medicine
+  const findData = async () => {
+    try {
+      const result = await getApi(
+        `${process.env.NEXT_PUBLIC_API_URL}/getSingalMedicine/${id}`
+      );
+      setSiData(result.data);
+    } catch (error) {
+      toast.error("Failed to fetch data");
+    }
+  };
+
+  useEffect(() => {
+    if (id) {
+      findData();
+    }
+  }, [id]);
+
+  // Reset form data once the siData has been fetched
+  useEffect(() => {
+    if (siData) {
+      reset({
+        name: siData.name,
+        description: siData.description,
+        price: siData.price,
+        stock_availability: siData.stock_availability,
+        required_prescription: siData.required_prescription,
+        manufacturer_details: {
+          name: siData.manufacturer_details.name,
+          address: siData.manufacturer_details.address,
+          contact: siData.manufacturer_details.contact,
+        },
+        expiry_date: siData.expiry_date.split("T")[0],
+      });
+    }
+  }, [siData, reset]);
+
   const onSubmit: SubmitHandler<MedicineFormData> = async (data) => {
-    const res = await postApi(
-      `${process.env.NEXT_PUBLIC_API_URL}/create-medicine`,
+    const result = await patchApi(
+      `${process.env.NEXT_PUBLIC_API_URL}/update-medicine/${id}`,
       data
     );
-    if (res) {
-      toast.success(res.message);
-      reset();
+    if (result) {
+      toast.success(result.message);
     }
-    console.log(res);
   };
+
+  // Loading spinner or empty message when data is not yet available
+  if (!siData) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <form
@@ -45,7 +88,7 @@ const MedicineForm = () => {
       className="space-y-6 max-w-2xl mx-auto p-8 bg-white shadow-lg rounded-xl"
     >
       <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">
-        Medicine Information
+        Update Medicine Information
       </h2>
 
       {/* Medicine Name */}
@@ -235,4 +278,4 @@ const MedicineForm = () => {
   );
 };
 
-export default MedicineForm;
+export default UpdateMedicineForm;
