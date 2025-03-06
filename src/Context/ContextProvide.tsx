@@ -67,13 +67,8 @@ const ContextProvider = ({ children }: ContextProviderProps) => {
         `${process.env.NEXT_PUBLIC_API_URL}/getUser/${res.email}`
       );
       console.log(result.data);
-      if (result) {
-        setUser({
-          name: result?.data?.email,
-          email: result?.data?.email,
-          role: result?.data?.role,
-          _id: result?.data?._id,
-        });
+      if (result.data) {
+        setUser(result.data);
       }
     }
   };

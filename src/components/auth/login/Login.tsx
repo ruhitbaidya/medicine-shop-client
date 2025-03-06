@@ -5,15 +5,13 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { toast } from "sonner";
 import { setCookie } from "../SGCokkie";
 import { useRouter } from "next/navigation";
-import { useContext, useEffect, useState } from "react";
-import { ContextCreate } from "@/Context/ContextProvide";
+import { useState } from "react";
 
 type Inputs = {
   email: string;
   password: string;
 };
 const Login = () => {
-  const { user } = useContext(ContextCreate);
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const { register, handleSubmit, reset } = useForm<Inputs>();
@@ -33,12 +31,6 @@ const Login = () => {
       router.push("/");
     }
   };
-  useEffect(() => {
-    if (user) {
-      router.push("/");
-      return;
-    }
-  }, []);
   return (
     <div>
       <div className="bg-gray-200">

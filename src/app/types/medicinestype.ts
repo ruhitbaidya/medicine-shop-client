@@ -49,6 +49,7 @@ export type TshippingInfo = {
 };
 
 export type Tuser = {
+  phone?: string;
   name: string;
   email: string;
   role: string;

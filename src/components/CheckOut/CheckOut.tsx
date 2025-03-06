@@ -7,8 +7,9 @@ import { toast } from "sonner";
 import { postApi } from "../api/apiCom";
 const CheckoutForm = () => {
   const router = useRouter();
-  const { user, card, count, shippingInfo, setTempOrder, imageUrl } =
+  const { user, card, setCard, count, shippingInfo, setTempOrder, imageUrl } =
     useContext(ContextCreate);
+  console.log(user?._id);
   const sendOrder = async (oId: string) => {
     const medicineId = card.map((item) => {
       return { id: item._id, quantity: item.quantity };
@@ -27,12 +28,15 @@ const CheckoutForm = () => {
       shippingAddress: shippingInfo,
       orderId: oId,
     });
-    const res = await postApi(
-      `${process.env.NEXT_PUBLIC_API_URL}/order`,
-      order
-    );
-    if (res.data) {
-      router.push("/order");
+    if (user?._id) {
+      const res = await postApi(
+        `${process.env.NEXT_PUBLIC_API_URL}/order`,
+        order
+      );
+      if (res.data) {
+        setCard([]);
+        router.push("/order");
+      }
     }
   };
   const stripe = useStripe();

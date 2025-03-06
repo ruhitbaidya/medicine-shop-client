@@ -1,7 +1,6 @@
 "use client";
 import { MedicineFormData, TCardFor } from "@/app/types/medicinestype";
 import { getApi } from "@/components/api/apiCom";
-import ReviewComponent from "@/components/pages/Review/Review";
 import { ContextCreate } from "@/Context/ContextProvide";
 import { useContext, useEffect, useState } from "react";
 
@@ -133,7 +132,6 @@ const MedicineDetails = ({ params }: { params: { id: string } }) => {
           </div>
         </div>
       </div>
-      <ReviewComponent />
     </div>
   );
 };

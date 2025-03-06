@@ -128,7 +128,7 @@ const CartPage = () => {
               Total
             </h2>
             <span className="text-3xl font-bold text-[var(--primary-color)]">
-              ${calculateTotal().toFixed(2)}
+              {calculateTotal().toFixed(2)}
             </span>
           </div>
 

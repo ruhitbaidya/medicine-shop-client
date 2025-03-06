@@ -1,5 +1,11 @@
-const AdminPage = () => {
-  return <div>Wellcome Admin Page</div>;
+import { OverView } from "@/components/admin/overView/OverView";
+
+const OverviewDashboard = () => {
+  return (
+    <>
+      <OverView />
+    </>
+  );
 };
 
-export default AdminPage;
+export default OverviewDashboard;

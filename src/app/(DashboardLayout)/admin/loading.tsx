@@ -1,10 +1,10 @@
 import Spinner from "@/components/shaired/spinner";
 import React from "react";
 
-const Loading = () => {
+const loading = () => {
   return (
     <div>
-      <div className="h-screen flex justify-center items-center">
+      <div className="flex justify-center items-center h-screen">
         <div>
           <Spinner />
         </div>
@@ -13,4 +13,4 @@ const Loading = () => {
   );
 };
 
-export default Loading;
+export default loading;
