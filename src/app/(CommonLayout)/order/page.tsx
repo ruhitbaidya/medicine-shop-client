@@ -1,7 +1,12 @@
-import React from "react";
+import OrderPage from "@/components/Order/Order";
 
-const OrderPage = () => {
-  return <div>OrderPage</div>;
+const OrderPa = () => {
+  return (
+    <div>
+      <h2></h2>
+      <OrderPage />
+    </div>
+  );
 };
 
-export default OrderPage;
+export default OrderPa;

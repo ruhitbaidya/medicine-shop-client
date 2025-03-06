@@ -5,17 +5,21 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { toast } from "sonner";
 import { setCookie } from "../SGCokkie";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-import { getUser } from "@/components/getUser/userFound";
+import { useContext, useEffect, useState } from "react";
+import { ContextCreate } from "@/Context/ContextProvide";
+
 type Inputs = {
   email: string;
   password: string;
 };
 const Login = () => {
+  const { user } = useContext(ContextCreate);
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const { register, handleSubmit, reset } = useForm<Inputs>();
+
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    localStorage.removeItem("userInfo");
     setLoading(true);
     const res = await postApi(
       `${process.env.NEXT_PUBLIC_API_URL}/auth` as string,
@@ -29,12 +33,11 @@ const Login = () => {
       router.push("/");
     }
   };
-  const founder = async () => {
-    const userInfo = await getUser();
-    console.log(userInfo);
-  };
   useEffect(() => {
-    founder();
+    if (user) {
+      router.push("/");
+      return;
+    }
   }, []);
   return (
     <div>

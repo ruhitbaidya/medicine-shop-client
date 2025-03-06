@@ -2,15 +2,19 @@
 "use client";
 
 import { MedicineFormData, TCardFor } from "@/app/types/medicinestype";
-import { getApi } from "@/components/api/apiCom";
+import { getApi, postApi } from "@/components/api/apiCom";
+import Spinner from "@/components/shaired/spinner";
 import { ContextCreate } from "@/Context/ContextProvide";
 
 import Link from "next/link";
 import { useContext, useEffect, useState } from "react";
 import { FaBangladeshiTakaSign } from "react-icons/fa6";
+
 const Shop = () => {
+  const [slideLow, setSlideLow] = useState<number | null>(0);
+  const [slideHigh, setSlideHigh] = useState<number | null>(0);
   const { card, setCard } = useContext(ContextCreate);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [Mdata, setMData] = useState<MedicineFormData[] | []>([]);
   const getAllMedi = async () => {
     setLoading(true);
@@ -26,6 +30,14 @@ const Shop = () => {
       setCard((prevCard) => [...prevCard, data]);
     }
   };
+  const handelChange = async (val: any) => {
+    setLoading(true);
+    const res = await postApi(`${process.env.NEXT_PUBLIC_API_URL}/filter`, val);
+    if (res.data.length > 0) {
+      setMData(res.data);
+      setLoading(false);
+    }
+  };
   useEffect(() => {
     getAllMedi();
   }, []);
@@ -37,48 +49,76 @@ const Shop = () => {
             <div
               className={`col-span-1 lg:block  bg-gray-50  p-[20px] border rounded-lg border-[#4a54e1]`}
             >
-              <h4 className="text-center">Filter</h4>
-              <p>Sorting</p>
-              <div>
+              <h4 className="text-center text-4xl">Filter</h4>
+              <h5>Sorting</h5>
+              <div className="mb-[20px]">
                 <select
                   className="border border-[#4a54e1] w-full rounded-lg p-[8px]"
                   name=""
                   id=""
+                  onChange={(e) => handelChange({ sort: e.target.value })}
                 >
-                  <option value="">Low To Hight</option>
-                  <option value="">Heigh To Low</option>
+                  <option value="lth">Low To Hight</option>
+                  <option value="htl">Heigh To Low</option>
                 </select>
               </div>
-              <p>Category</p>
-              <div>
+              <h5>Category</h5>
+              <div className="mb-[20px]">
                 <select
                   className="border border-[#4a54e1] w-full rounded-lg p-[8px]"
                   name=""
                   id=""
+                  onChange={(e) => handelChange({ category: e.target.value })}
                 >
-                  <option value="">HasuGrou</option>
-                  <option value="">HasuGrou</option>
-                  <option value="">HasuGrou</option>
-                  <option value="">HasuGrou</option>
-                  <option value="">HasuGrou</option>
-                  <option value="">HasuGrou</option>
-                  <option value="">HasuGrou</option>
-                  <option value="">Heigh To Low</option>
+                  <option value="CardioCare">CardioCare</option>
+                  <option value="ThyroCare">ThyroCare</option>
+                  <option value="NeuroCare">NeuroCare</option>
+                  <option value="MentalHealth Inc.">MentalHealth Inc.</option>
+                  <option value="GastroHealth Inc.">GastroHealth Inc.</option>
                 </select>
               </div>
-              <p>Price</p>
-              <div>
-                <p>Low To Hight</p>
-                <input type="range" className="w-full" />
+              <h5>Price</h5>
+              <div className="mb-[20px]">
+                <h5>Heigh Range</h5>
+                <span>{slideHigh}</span>
+                <input
+                  min="0"
+                  max="200"
+                  step="5"
+                  onChange={(e) => setSlideHigh(parseInt(e.target.value))}
+                  type="range"
+                  className="w-full bg-[#5f63f2]"
+                />
+              </div>
+              <div className="mb-[20px]">
+                <h5>Low Range</h5>
+                <span>{slideLow}</span>
+                <input
+                  min="0"
+                  max="200"
+                  step="5"
+                  onChange={(e) => setSlideLow(parseInt(e.target.value))}
+                  type="range"
+                  className="w-full bg-[#5f63f2]"
+                />
               </div>
               <div>
-                <p>heigh To Low</p>
-                <input type="range" className="w-full" />
+                <button
+                  onClick={() => handelChange({ h: slideHigh, l: slideLow })}
+                  className="btns w-full"
+                >
+                  Find
+                </button>
               </div>
-              <div>
-                <p>Prescription</p>
+              <div className="my-[20px]">
+                <h5>Prescription</h5>
                 <div className="">
-                  <input type="checkbox" id="presc" className="mr-[10px]" />
+                  <input
+                    onChange={(e) => handelChange({ pcheck: e.target.checked })}
+                    type="checkbox"
+                    id="presc"
+                    className="mr-[10px]"
+                  />
                   <label htmlFor="presc">Checked Prescripption</label>
                 </div>
               </div>
@@ -86,7 +126,9 @@ const Shop = () => {
             <div className="col-span-3 bg-gray-50  p-[20px] border rounded-lg border-[#4a54e1]">
               {loading && (
                 <div>
-                  <p className="text-center">Loading......</p>
+                  <h5 className="text-center">
+                    <Spinner />
+                  </h5>
                 </div>
               )}
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[25px]">

@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
+import { postApi } from "@/components/api/apiCom";
 import { ContextCreate } from "@/Context/ContextProvide";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -7,10 +8,12 @@ import { useContext, useEffect, useState } from "react";
 import { FaBangladeshiTakaSign } from "react-icons/fa6";
 import { toast } from "sonner";
 const CheckoutPage = () => {
-  const { card, count, setShippingInfo } = useContext(ContextCreate);
+  const { card, count, setShippingInfo, setImageUrl } =
+    useContext(ContextCreate);
+  const [image, setImage] = useState<File | null>(null);
+  const uploadImage = new FormData();
   const router = useRouter();
   const [pCheck, setPCheck] = useState(false);
-  console.log(card);
   const [shippingDetails, setShippingDetails] = useState({
     name: "",
     address: "",
@@ -40,9 +43,12 @@ const CheckoutPage = () => {
     const file = e.target.files ? e.target.files[0] : null;
     const image = URL.createObjectURL(file as File);
     setPrescription(image);
+    uploadImage.append("image", file as File);
+    if (file) {
+      setImage(file);
+    }
   };
-
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (pCheck) {
       if (!prescription) {
         toast.error("Plrase Select Prescription");
@@ -62,10 +68,27 @@ const CheckoutPage = () => {
       toast.error("Give Your Adders name Phone Number");
       return;
     }
+    if (image) {
+      const formData = new FormData();
+      formData.append("image", image);
+      console.log(image);
+      const res = await fetch(
+        `https://api.imgbb.com/1/upload?key=${process.env.NEXT_PUBLIC_IMG_BB_API_KEY}`,
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
+      const result = await res.json();
+      if (result.data.display_url) {
+        setImageUrl(result.data.display_url);
+      }
+      console.log();
+    }
     setShippingInfo(shippingDetails);
     router.push("/payment");
   };
-
+  console.log(pCheck);
   return (
     <div className="container mx-auto px-6 py-10">
       <h1 className="text-3xl font-bold text-[var(--primary-color)] mb-6">
@@ -77,7 +100,6 @@ const CheckoutPage = () => {
           pCheck ? "2" : "1"
         } gap-[25px]`}
       >
-        {/* Shipping Details */}
         <div className="bg-white shadow-lg rounded-lg p-6 mb-6">
           <h2 className="text-2xl font-semibold text-[var(--primary-color)] mb-4">
             Shipping Details
@@ -126,7 +148,6 @@ const CheckoutPage = () => {
           </div>
         </div>
 
-        {/* Prescription Upload (if required) */}
         <div
           className={`bg-white ${
             pCheck ? "" : "hidden"

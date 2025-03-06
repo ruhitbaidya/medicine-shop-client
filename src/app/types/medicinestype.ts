@@ -6,7 +6,6 @@ export interface ManufacturerDetails {
 }
 
 export interface MedicineFormData {
-  id: string;
   _id?: string;
   name: string;
   description: string;
@@ -47,4 +46,25 @@ export type TshippingInfo = {
   city: string;
   postalCode: string;
   phone: string;
+};
+
+export type Tuser = {
+  name: string;
+  email: string;
+  role: string;
+  _id: string;
+};
+type ShippingAddrse = {
+  address: string;
+  city: string;
+  name: string;
+  phone: string;
+  postalCode: string;
+};
+
+export type TOrder = {
+  medicine: TCardFor[];
+  orderId: string;
+  shippingAddress: ShippingAddrse | null;
+  user: string | undefined;
 };

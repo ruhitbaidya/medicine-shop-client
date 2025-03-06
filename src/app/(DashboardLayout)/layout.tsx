@@ -1,17 +1,19 @@
 "use client";
 import { Logout } from "@/components/getUser/logOutUser";
+import { ContextCreate } from "@/Context/ContextProvide";
 import Link from "next/link";
-import { useRouter, usePathname } from "next/navigation"; // Import usePathname
-import { ReactNode, useState } from "react";
+import { useRouter, usePathname } from "next/navigation";
+import { ReactNode, useContext, useState } from "react";
 import { FiMenu, FiHome, FiBarChart, FiUsers } from "react-icons/fi";
 
 export default function Dashboard({ children }: { children: ReactNode }) {
+  const { setUser, user } = useContext(ContextCreate);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const router = useRouter();
   const pathname = usePathname(); // Use usePathname to get the current path
-
   const handelLogout = async () => {
     await Logout();
+    setUser(null);
     router.push("/login");
   };
 
@@ -19,7 +21,7 @@ export default function Dashboard({ children }: { children: ReactNode }) {
   const isActive = (path: string) => {
     return pathname === path;
   };
-
+  console.log(user);
   return (
     <div className="flex h-screen bg-gray-100">
       {/* Sidebar */}
@@ -78,7 +80,7 @@ export default function Dashboard({ children }: { children: ReactNode }) {
             <FiMenu size={24} />
           </button>
           <div className="flex gap-[25px] items-center justify-between w-full">
-            <h2 className="text-xl font-bold">Dashboard</h2>
+            <h2 className="text-xl font-bold">{user?.name}</h2>
             <button className="btns" onClick={handelLogout}>
               Logout
             </button>

@@ -6,6 +6,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { toast } from "sonner";
 
 type Inputs = {
+  name: string;
   email: string;
   phone: string;
   password: string;
@@ -43,6 +44,14 @@ const Register = () => {
                   <h2 className="text-left text-4xl mb-[20px]">Register</h2>
                 </div>
                 <form onSubmit={handleSubmit(onSubmit)}>
+                  <div className="mb-[20px]">
+                    <input
+                      type="text"
+                      placeholder="Enter Your Name!"
+                      {...register("name")}
+                      className="w-full focus:outline-none border border-gray-400 rounded-lg p-[10px]"
+                    />
+                  </div>
                   <div className="mb-[20px]">
                     <input
                       type="email"

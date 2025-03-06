@@ -1,19 +1,39 @@
 "use client";
 import { ContextCreate } from "@/Context/ContextProvide";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
+import { useRouter } from "next/navigation";
 import { useState, FormEvent, useContext } from "react";
-import { getUser } from "../getUser/userFound";
+import { toast } from "sonner";
+import { postApi } from "../api/apiCom";
 const CheckoutForm = () => {
-  const { card, count, shippingInfo } = useContext(ContextCreate);
-  console.log(card);
-  const sendOrder = async () => {
-    const user = await getUser();
-    const medicineId = card.map((item) => item._id);
-    console.log({
-      medicine: medicineId,
-      user: user?.email,
-      address: shippingInfo,
+  const router = useRouter();
+  const { user, card, count, shippingInfo, setTempOrder, imageUrl } =
+    useContext(ContextCreate);
+  const sendOrder = async (oId: string) => {
+    const medicineId = card.map((item) => {
+      return { id: item._id, quantity: item.quantity };
     });
+    const order = {
+      medicine: medicineId,
+      user: user?._id,
+      shippingAddress: shippingInfo,
+      orderId: oId,
+      prescription: imageUrl,
+    };
+    console.log(order);
+    setTempOrder({
+      medicine: card,
+      user: user?._id,
+      shippingAddress: shippingInfo,
+      orderId: oId,
+    });
+    const res = await postApi(
+      `${process.env.NEXT_PUBLIC_API_URL}/order`,
+      order
+    );
+    if (res.data) {
+      router.push("/order");
+    }
   };
   const stripe = useStripe();
   const elements = useElements();
@@ -23,7 +43,6 @@ const CheckoutForm = () => {
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    sendOrder();
     setLoading(true);
     setError("");
     setSuccess("");
@@ -72,7 +91,11 @@ const CheckoutForm = () => {
       if (stripeError) {
         setError(stripeError.message || "An error occurred during payment.");
       } else if (paymentIntent) {
-        setSuccess(`Payment successful! ID: ${paymentIntent.id}`);
+        setSuccess(`${paymentIntent.id}`);
+        toast.success(
+          `Your Payment Successfull your Order id ${paymentIntent.id}`
+        );
+        sendOrder(paymentIntent.id);
       }
     } catch (err) {
       setError(
@@ -114,7 +137,9 @@ const CheckoutForm = () => {
         </button>
         {error && <p className="text-red-500 text-center mt-4">{error}</p>}
         {success && (
-          <p className="text-green-500 text-center mt-4">{success}</p>
+          <p className="text-green-500 text-center mt-4">
+            Payment Successfull Your Order Id{success}
+          </p>
         )}
       </form>
     </div>
