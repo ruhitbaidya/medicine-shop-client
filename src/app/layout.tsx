@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "sonner";
 import { ContextProvider } from "@/Context/ContextProvide";
+import Head from "next/head";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,6 +28,9 @@ export default function RootLayout({
   return (
     <ContextProvider>
       <html lang="en">
+        <Head>
+          <link rel="icon" href="/favicon.png" type="image/png" />
+        </Head>
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >

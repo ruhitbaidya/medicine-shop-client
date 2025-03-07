@@ -88,30 +88,27 @@ const CustomerOrders = () => {
         </table>
       </div>
 
-      {/* Order Details Modal */}
       {isModalOpen && selectedOrder && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
           <div className="bg-white p-6 w-full max-w-md rounded-2xl shadow-lg border border-gray-200">
             <h2 className="text-lg font-semibold text-gray-800 mb-4">
-              Order Details (User ID: {selectedOrder})
+              (User ID: {selectedOrder})
             </h2>
 
             {orders.length > 0 ? (
               <div>
-                <h3 className="text-gray-800 font-semibold mb-2">Medicines:</h3>
+                <h3 className="text-gray-800 font-semibold mb-2">
+                  Order Id And Date:
+                </h3>
                 <ul className="list-disc pl-5 mb-4">
                   {orders.map((order: any) => (
                     <li key={order._id} className="text-gray-700">
-                      <strong>Order ID:</strong> {order.orderId}
-                      <br />
-                      <strong>Medicines:</strong>
-                      <ul className="list-disc pl-5">
-                        {order.medicine.map((med: any) => (
-                          <li key={med._id}>
-                            {med.id.name} (Qty: {med.quantity})
-                          </li>
-                        ))}
-                      </ul>
+                      <div className="p-[10px] border rounded-lg">
+                        <strong>Order Date:</strong>{" "}
+                        {new Date(order.createdAt).toDateString()}
+                        <br />
+                        <strong>Order ID:</strong> {order.orderId}
+                      </div>
                     </li>
                   ))}
                 </ul>
