@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 import { getApi, patchApi } from "@/components/api/apiCom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "sonner";
 
@@ -30,8 +30,8 @@ const UpdateMedicineForm = ({ id }: { id: string | null | undefined }) => {
     reset, // Use reset to update the form's default values
   } = useForm<MedicineFormData>();
 
-  // Fetch data for the specific medicine
-  const findData = async () => {
+  // Memoize findData using useCallback
+  const findData = useCallback(async () => {
     try {
       const result = await getApi(
         `${process.env.NEXT_PUBLIC_API_URL}/getSingalMedicine/${id}`
@@ -40,13 +40,13 @@ const UpdateMedicineForm = ({ id }: { id: string | null | undefined }) => {
     } catch (error) {
       toast.error("Failed to fetch data");
     }
-  };
+  }, [id]); // Add `id` as a dependency
 
   useEffect(() => {
     if (id) {
       findData();
     }
-  }, [id]);
+  }, [id, findData]); // Add `findData` to the dependency array
 
   // Reset form data once the siData has been fetched
   useEffect(() => {
@@ -68,12 +68,16 @@ const UpdateMedicineForm = ({ id }: { id: string | null | undefined }) => {
   }, [siData, reset]);
 
   const onSubmit: SubmitHandler<MedicineFormData> = async (data) => {
-    const result = await patchApi(
-      `${process.env.NEXT_PUBLIC_API_URL}/update-medicine/${id}`,
-      data
-    );
-    if (result) {
-      toast.success(result.message);
+    try {
+      const result = await patchApi(
+        `${process.env.NEXT_PUBLIC_API_URL}/update-medicine/${id}`,
+        data
+      );
+      if (result) {
+        toast.success(result.message);
+      }
+    } catch (error) {
+      toast.error("Failed to update medicine");
     }
   };
 

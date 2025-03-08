@@ -19,8 +19,9 @@ const Shop = () => {
   const getAllMedi = async () => {
     setLoading(true);
     const res = await getApi(`${process.env.NEXT_PUBLIC_API_URL}/get-medicine`);
-    setMData(res.data);
+    console.log(res);
     if (res.data) {
+      setMData(res.data);
       setLoading(false);
     }
   };

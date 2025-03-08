@@ -10,4 +10,14 @@ const Spinner = () => {
   );
 };
 
+export const Spinner2 = () => {
+  return (
+    <div>
+      <div className="flex justify-center items-center">
+        <div className="w-16 h-16 border-8 border-solid border-gray-200 border-t-blue-500 rounded-full animate-spin"></div>
+      </div>
+    </div>
+  );
+};
+
 export default Spinner;

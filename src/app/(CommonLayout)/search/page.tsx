@@ -64,6 +64,13 @@ const SearchPage = () => {
                 <Spinner />
               ) : (
                 <>
+                  {Mdata.length < 1 ? (
+                    <p className="text-center text-2xl">
+                      No Result Found In Your Search
+                    </p>
+                  ) : (
+                    ""
+                  )}
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[25px]">
                     {Mdata?.map((medicine) => (
                       <div

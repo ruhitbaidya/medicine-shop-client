@@ -6,14 +6,13 @@ import { CiMenuFries } from "react-icons/ci";
 import { getUser } from "../getUser/userFound";
 import { usePathname } from "next/navigation"; // Add usePathname
 import CardProfile from "./CardProfile";
+import { TUserIn } from "@/app/types/medicinestype";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const [user, setUser] = useState<{ email: string; role: string } | null>(
-    null
-  );
-  const pathname = usePathname(); // Get the current pathname
+  const [user, setUser] = useState<TUserIn | undefined | null>(null);
+  const pathname = usePathname();
 
   const userFounder = async () => {
     const data = await getUser();

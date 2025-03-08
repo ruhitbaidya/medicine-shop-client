@@ -20,7 +20,7 @@ const CardProfile = () => {
   };
   const getDatas = async () => {
     const res = await getUser();
-    setUser(res);
+    setUser(res!);
   };
   useEffect(() => {
     getDatas();

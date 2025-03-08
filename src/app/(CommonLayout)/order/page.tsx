@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import { getApi } from "@/components/api/apiCom";
 import { ContextCreate } from "@/Context/ContextProvide";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useCallback } from "react";
 import { toast } from "sonner";
 import Spinner from "@/components/shaired/spinner";
 
@@ -14,6 +15,7 @@ interface Order {
   user: string;
   __v: number;
   _id: string;
+  medicine: any;
 }
 
 const OrderPagesUser = () => {
@@ -21,17 +23,18 @@ const OrderPagesUser = () => {
   const [orders, setOrders] = useState<Order[] | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
-  const getData = async () => {
+  // Memoize getData using useCallback
+  const getData = useCallback(async () => {
     if (user?._id) {
       try {
         const res = await getApi(
           `${process.env.NEXT_PUBLIC_API_URL}/getuserorder/${user?._id}`
         );
+        console.log(res);
         if (res.data.length > 0) {
           setOrders(res.data);
-          if (res.data.length < 1) {
-            toast.error("You have no orders.");
-          }
+        } else {
+          toast.error("You have no orders.");
         }
       } catch (error) {
         console.error("Error fetching orders:", error);
@@ -40,16 +43,16 @@ const OrderPagesUser = () => {
         setLoading(false);
       }
     }
-  };
+  }, [user?._id]); // Add user._id as a dependency
 
   useEffect(() => {
     getData();
-  }, [user?._id]);
+  }, [getData]); // Add getData to the dependency array
 
   return (
     <div className="p-8 bg-gradient-to-br from-purple-50 to-blue-50 min-h-screen w-full">
       <h1 className="text-3xl font-bold text-gray-800 mb-8 text-center">
-        Order Table
+        Your Order
       </h1>
 
       {loading ? (
@@ -64,7 +67,7 @@ const OrderPagesUser = () => {
                 <th className="px-6 py-4 text-left">Order ID</th>
                 <th className="px-6 py-4 text-left">Date</th>
                 <th className="px-6 py-4 text-left">Status</th>
-                <th className="px-6 py-4 text-left">Actions</th>
+                <th className="px-6 py-4 text-left">Medicine</th>
               </tr>
             </thead>
             <tbody>
@@ -92,13 +95,15 @@ const OrderPagesUser = () => {
                       {item.status}
                     </span>
                   </td>
-                  <td className="px-6 py-4">
-                    <button
-                      onClick={() => console.log("View Details:", item._id)}
-                      className="text-blue-500 hover:text-blue-700 underline text-sm"
-                    >
-                      View Details
-                    </button>
+                  <td className="px-6 py-4 h-[50px]">
+                    <ul className="overflow-y-auto max-h-[50px]">
+                      {item.medicine.map((m: any) => (
+                        <li key={m.id._id}>
+                          <span className="text-[#5f63f2]">{m?.id?.name}</span>
+                          <span className="ml-[10px]">{m?.quantity} pcs</span>
+                        </li>
+                      ))}
+                    </ul>
                   </td>
                 </tr>
               ))}

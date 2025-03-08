@@ -19,46 +19,47 @@ const BrandingSection = () => {
     }, 3000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [medicines.length]); // Add `medicines.length` to the dependency array
 
   return (
-    <>
-      <div className="mt-[10px]">
-        <div className="container mx-auto px-[10px]">
-          <div className="lg:flex justify-between items-center bannerBG p-[50px] border border-[#4a54e1] rounded-lg">
-            <div className="flex-1">
-              <h1 className="mb-[20px] text-[25px] lg:text-5xl font-bold">
-                Your Trusted Online Pharmacy
-              </h1>
-              <p className="mb-[200px]">
-                Get high-quality medicines and healthcare products delivered to
-                your doorstep.
-              </p>
+    <div className="mt-[10px]">
+      <div className="container mx-auto px-[10px]">
+        <div className="lg:flex justify-between items-center bannerBG p-[50px] border border-[#4a54e1] rounded-lg">
+          {/* Left Section - Text Content */}
+          <div className="flex-1">
+            <h1 className="mb-[20px] text-[25px] lg:text-5xl font-bold">
+              Your Trusted Online Pharmacy
+            </h1>
+            <p className="mb-[20px] lg:mb-[200px]">
+              Get high-quality medicines and healthcare products delivered to
+              your doorstep.
+            </p>
 
-              <div>
-                <Link
-                  href="/shop"
-                  className="bg-[#4a54e1] bannerBtn px-[45px] py-[12px] rounded-lg"
-                >
-                  Shop Now
-                </Link>
-              </div>
+            {/* Shop Now Button */}
+            <div>
+              <Link
+                href="/shop"
+                className="bg-[#4a54e1] bannerBtn px-[45px] py-[12px] rounded-lg text-white hover:bg-[#3a44d1] transition-colors duration-300"
+              >
+                Shop Now
+              </Link>
             </div>
+          </div>
 
-            {/* Image Auto Slider */}
-            <div className="flex-1 flex justify-center items-center">
-              <Image
-                src={medicines[current]}
-                width={400}
-                height={600}
-                alt="Medicine"
-                className="rounded-lg transition-opacity duration-700"
-              />
-            </div>
+          {/* Right Section - Image Slider */}
+          <div className="flex-1 flex justify-center items-center">
+            <Image
+              src={medicines[current]}
+              width={400}
+              height={600}
+              alt="Medicine"
+              className="rounded-lg transition-opacity duration-700"
+              priority // Ensure the first image loads quickly
+            />
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

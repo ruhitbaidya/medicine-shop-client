@@ -3,6 +3,7 @@ import { getApi, patchApi } from "@/components/api/apiCom";
 import Spinner from "@/components/shaired/spinner";
 import React, { useEffect, useState } from "react";
 import { FaPills, FaFilePrescription, FaCheck, FaTimes } from "react-icons/fa";
+import Image from "next/image"; // Import the Image component
 
 type MedicineType = {
   id: {
@@ -204,11 +205,19 @@ const PrescriptionOrders = () => {
               <FaFilePrescription className="mr-2 text-blue-500" />
               Prescription
             </h2>
-            <img
-              src={selectedPrescription}
-              alt="Prescription"
-              className="w-full rounded-lg"
-            />
+            {/* Use Next.js Image component */}
+            <div className="relative w-full h-64 rounded-lg overflow-hidden">
+              <Image
+                src={selectedPrescription}
+                alt="Prescription"
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                onError={(e) => {
+                  e.currentTarget.src = "/fallback-prescription.jpg"; // Fallback image
+                }}
+              />
+            </div>
             <button
               onClick={closePrescriptionModal}
               className="mt-4 bg-[#5f63f2] text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors w-full flex items-center justify-center"

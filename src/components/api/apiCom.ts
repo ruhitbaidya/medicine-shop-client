@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+
 "use server";
 import { cookies } from "next/headers";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const getToken = async () => {
   const cookier = cookies();
   const token = (await cookier).get("authToken")?.value;
@@ -34,11 +34,10 @@ export const getApi = async (url: string) => {
     },
     cache: "no-store",
   });
-  const result = await res.json();
+  const result = res.json();
   return result;
 };
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const patchApi = async (url: string, data: any) => {
   const token = await getToken();
   const res = await fetch(url, {

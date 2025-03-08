@@ -1,6 +1,7 @@
 "use client";
 import { MedicineFormData } from "@/app/types/medicinestype";
 import { getApi } from "@/components/api/apiCom";
+import Spinner, { Spinner2 } from "@/components/shaired/spinner";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { FaBangladeshiTakaSign } from "react-icons/fa6";
@@ -31,15 +32,16 @@ const ShopOverview = () => {
           </p>
         </div>
 
-        {/* Featured Medicines Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8">
+        <div className="p-[20px]">
           {loading && (
-            <div>
-              <p className="text-center">Loading.......</p>
+            <div className="">
+              <Spinner2 />
             </div>
           )}
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8">
           {medicine ? (
-            medicine?.splice(0, 9)?.map((medicine) => (
+            medicine?.splice(0, 6)?.map((medicine) => (
               <div
                 key={medicine._id}
                 className="bg-white p-5 rounded-lg shadow-md hover:shadow-xl transition transform hover:-translate-y-2"
@@ -62,7 +64,7 @@ const ShopOverview = () => {
           ) : (
             <>
               <div>
-                <p className="text-center">Loading.......</p>
+                <Spinner />
               </div>
             </>
           )}
