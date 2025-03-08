@@ -1,36 +1,80 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# RM-Corner
 
-## Getting Started
+![Medicine E-Commerce Shop Logo](https://via.placeholder.com/150x50?text=Medicine+Shop+Logo)  
+**Medicine E-Commerce Shop** is an online platform where users can browse, search, and purchase medicines. It provides a seamless shopping experience for customers and a robust management system for admins. Built with **Next.js**, **TypeScript**, and **Tailwind CSS**, this project ensures a modern, responsive, and secure user interface.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 🚀 Live Demo
+
+- **RM-Corner**: [https://medicine-shop.vercel.app](https://medicine-client-rust.vercel.app/)
+
+---
+
+## ✨ Key Features
+
+### For Customers:
+
+- **User Authentication**: Secure login and registration using JWT.
+- **Medicine Search**: Search medicines by name, category, or symptoms.
+- **Shopping Cart**: Add, edit, and remove items from the cart.
+- **Checkout**: Secure payment integration with prescription upload (if required).
+- **Order Tracking**: Track orders with real-time status updates.
+- **Profile Management**: Update personal details and view order history.
+
+### For Admins:
+
+- **Admin Dashboard**: Manage medicines, orders, and users.
+- **Medicine Management**: Add, update, or remove medicines.
+- **Order Management**: Approve/reject prescription-based orders and update order statuses.
+- **User Management**: View customer details and order history.
+- **Stock Alerts**: Notifications for low stock levels.
+
+---
+
+## 🛠️ Tech Stack
+
+### Frontend:
+
+- **Next.js**: For server-side rendering and routing.
+- **TypeScript**: For type safety and better developer experience.
+- **Tailwind CSS**: For responsive and modern UI design.
+- **React**: For building interactive user interfaces.
+- **Axios**: For API requests.
+
+### Backend:
+
+- **Node.js**: For building the REST API.
+- **Express**: For handling HTTP requests.
+- **MongoDB**: For database management.
+- **JWT**: For secure authentication.
+- **bcryptjs**: For password hashing.
+
+---
+
+## 🖥️ Frontend Routes
+
+### Customer Routes:
+
+- **Home Page** (`/`): Overview of the shop with featured medicines and search functionality.
+- **Register Page** (`/register`): Customer registration.
+- **Login Page** (`/login`): Customer login.
+- **Shop Page** (`/shop`): Browse all medicines with filtering and sorting options.
+- **Medicine Details** (`/medicine/:id`): Detailed information about a specific medicine.
+- **Cart Page** (`/cart`): View and edit the shopping cart.
+- **Checkout Page** (`/checkout`): Enter shipping details, upload prescriptions, and confirm orders.
+- **Order History** (`/orders`): View past and current orders.
+- **Profile Page** (`/profile`): Update personal details.
+
+### Admin Routes:
+
+- **Admin Dashboard** (`/admin`): Overview of total orders, stock levels, and pending prescriptions.
+- **Manage Medicines** (`/admin/medicines`): Add, update, or remove medicines.
+- **Manage Orders** (`/admin/orders`): Approve/reject orders and update order statuses.
+- **Manage Users** (`/admin/users`): View customer details and order history.
+
+---
+
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```

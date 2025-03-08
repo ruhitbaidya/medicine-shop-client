@@ -29,6 +29,9 @@ const Login = () => {
       toast.success(res.message);
       await setCookie(res.data);
       router.push("/");
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
     }
   };
   return (

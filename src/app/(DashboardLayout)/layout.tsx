@@ -28,7 +28,7 @@ export default function Dashboard({ children }: { children: ReactNode }) {
       <div
         className={`fixed md:relative bg-white w-64 p-5 h-full transition-transform duration-300 ${
           isSidebarOpen ? "translate-x-0" : "-translate-x-64"
-        } md:translate-x-0 shadow-lg`}
+        } md:translate-x-0 shadow-lg z-10`}
       >
         <div className="flex items-center justify-between mb-5">
           <h2 className="text-xl font-bold">

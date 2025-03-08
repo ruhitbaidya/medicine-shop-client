@@ -34,7 +34,7 @@ const Shop = () => {
   const handelChange = async (val: any) => {
     setLoading(true);
     const res = await postApi(`${process.env.NEXT_PUBLIC_API_URL}/filter`, val);
-    if (res.data.length > 0) {
+    if (res.data) {
       setMData(res.data);
       setLoading(false);
     }
@@ -132,6 +132,15 @@ const Shop = () => {
                   </h5>
                 </div>
               )}
+              <div>
+                {Mdata.length < 1 ? (
+                  <p className="text-center text-3xl">
+                    Your Filter Medicine Not Found
+                  </p>
+                ) : (
+                  ""
+                )}
+              </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[25px]">
                 {Mdata.map((medicine) => (
                   <div

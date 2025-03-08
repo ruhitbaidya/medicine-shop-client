@@ -64,7 +64,7 @@ const Profile = () => {
         {loading ? (
           <Spinner />
         ) : (
-          <div className="w-[70%] mx-auto p-[50px] bg-gray-100 border border-[#5f63f2] rounded-lg">
+          <div className="w-[100%] lg:w-[70%] mx-auto p-[20px] lg:p-[50px] bg-gray-100 border border-[#5f63f2] rounded-lg">
             <h5 className="mb-[20px] text-3xl">Update Profile</h5>
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className="space-y-8">

@@ -3,7 +3,7 @@ import { getApi, patchApi } from "@/components/api/apiCom";
 import Spinner from "@/components/shaired/spinner";
 import React, { useEffect, useState } from "react";
 import { FaPills, FaFilePrescription, FaCheck, FaTimes } from "react-icons/fa";
-import Image from "next/image"; // Import the Image component
+import Image from "next/image";
 
 type MedicineType = {
   id: {
@@ -53,6 +53,7 @@ const PrescriptionOrders = () => {
     string | null
   >(null);
   const [loading, setLoading] = useState<boolean>(true);
+  const [imageLoading, setImageLoading] = useState<boolean>(false); // State for image loading
 
   const getAllOrder = async () => {
     try {
@@ -72,7 +73,6 @@ const PrescriptionOrders = () => {
         { id, status }
       );
       console.log(res);
-      // Update the order status in the UI instantly
       setOrders((prevOrders) =>
         prevOrders.map((order) =>
           order._id === id ? { ...order, status } : order
@@ -89,10 +89,12 @@ const PrescriptionOrders = () => {
 
   const openPrescriptionModal = (prescription: string) => {
     setSelectedPrescription(prescription);
+    setImageLoading(true); // Start loading when opening the modal
   };
 
   const closePrescriptionModal = () => {
     setSelectedPrescription(null);
+    setImageLoading(false); // Reset loading state
   };
 
   return (
@@ -112,7 +114,7 @@ const PrescriptionOrders = () => {
               key={order._id}
               className="bg-gradient-to-br from-white to-purple-50 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 p-6 border border-purple-100 relative"
             >
-              {/* Status Badge - Top Right Corner */}
+              {/* Status Badge */}
               <span
                 className={`absolute top-4 right-4 px-3 py-1 rounded-full text-xs font-semibold ${
                   order.status === "pending"
@@ -200,21 +202,29 @@ const PrescriptionOrders = () => {
       {/* Prescription Modal */}
       {selectedPrescription && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-lg shadow-lg p-6 max-w-md w-full">
+          <div className="bg-white rounded-lg shadow-lg p-6 max-w-4xl w-full">
             <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center">
               <FaFilePrescription className="mr-2 text-blue-500" />
               Prescription
             </h2>
-            {/* Use Next.js Image component */}
-            <div className="relative w-full h-64 rounded-lg overflow-hidden">
+            {/* Image Loader */}
+            {imageLoading && (
+              <div className="flex justify-center items-center h-64">
+                <Spinner />
+              </div>
+            )}
+            {/* Full-Screen Image */}
+            <div className="relative w-full h-[70vh] rounded-lg overflow-hidden">
               <Image
                 src={selectedPrescription}
                 alt="Prescription"
                 fill
-                className="object-cover"
+                className="object-contain"
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                onLoad={() => setImageLoading(false)} // Stop loading when image is loaded
                 onError={(e) => {
                   e.currentTarget.src = "/fallback-prescription.jpg"; // Fallback image
+                  setImageLoading(false); // Stop loading on error
                 }}
               />
             </div>

@@ -16,7 +16,10 @@ const CardProfile = () => {
   const router = useRouter();
   const handelLogout = async () => {
     await Logout();
-    router.push("/login");
+    router.push("/");
+    setTimeout(() => {
+      window.location.reload();
+    }, 2000);
   };
   const getDatas = async () => {
     const res = await getUser();

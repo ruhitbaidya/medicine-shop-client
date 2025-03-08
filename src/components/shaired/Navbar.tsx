@@ -50,7 +50,22 @@ const Navbar = () => {
           </div>
 
           <div className="hidden md:flex items-center space-x-6">
-            {user?.role === "admin" ? (
+            <div
+              className={`${
+                user?.role ? "hidden" : ""
+              } flex gap-[25px] items-center`}
+            >
+              <Link
+                href="/login"
+                className={`text-gray-700 hover:text-blue-600 ${
+                  isActive("/admin") ? "text-[#5f63f2] !important" : ""
+                }`}
+              >
+                Login
+              </Link>
+              <CardProfile />
+            </div>
+            {user?.role === "admin" && (
               <>
                 <Link
                   href="/shop"
@@ -86,7 +101,8 @@ const Navbar = () => {
                 </Link>
                 <CardProfile />
               </>
-            ) : (
+            )}
+            {user?.role === "customer" && (
               <>
                 <Link
                   href="/shop"
@@ -112,12 +128,6 @@ const Navbar = () => {
                 >
                   Profile
                 </Link>
-                <Link
-                  href="/login"
-                  className="text-gray-700 hover:text-blue-600"
-                >
-                  Login
-                </Link>
 
                 <CardProfile />
               </>
@@ -128,36 +138,84 @@ const Navbar = () => {
         {isMenuOpen && (
           <div className="md:hidden">
             <div className="flex flex-col space-y-4 mt-4 pb-4">
-              <Link
-                href="/shop"
-                className={`text-gray-700 hover:text-blue-600 ${
-                  isActive("/shop") ? "text-[#5f63f2] !important" : ""
-                }`}
+              <div
+                className={`${
+                  user?.role ? "hidden" : ""
+                } flex gap-[25px] items-center`}
               >
-                Shop
-              </Link>
-              <Link href="/cart" className="text-gray-700 hover:text-blue-600">
-                Cart
-              </Link>
-              <Link
-                href="/orders"
-                className={`text-gray-700 hover:text-blue-600 ${
-                  isActive("/orders") ? "text-[#5f63f2] !important" : ""
-                }`}
-              >
-                Orders
-              </Link>
-              <Link
-                href="/profile"
-                className={`text-gray-700 hover:text-blue-600 ${
-                  isActive("/profile") ? "text-[#5f63f2] !important" : ""
-                }`}
-              >
-                Profile
-              </Link>
-              <Link href="/login" className="text-gray-700 hover:text-blue-600">
-                Login
-              </Link>
+                <Link
+                  href="/login"
+                  className={`text-gray-700 hover:text-blue-600 ${
+                    isActive("/admin") ? "text-[#5f63f2] !important" : ""
+                  }`}
+                >
+                  Login
+                </Link>
+              </div>
+              {user?.role === "admin" && (
+                <>
+                  <Link
+                    href="/shop"
+                    className={`text-gray-700 hover:text-blue-600 ${
+                      isActive("/shop") ? "text-[#5f63f2] !important" : ""
+                    }`}
+                  >
+                    Shop
+                  </Link>
+                  <Link
+                    href="/order"
+                    className={`text-gray-700 hover:text-blue-600 ${
+                      isActive("/order") ? "text-[#5f63f2] !important" : ""
+                    }`}
+                  >
+                    Orders
+                  </Link>
+                  <Link
+                    href="/profile"
+                    className={`text-gray-700 hover:text-blue-600 ${
+                      isActive("/profile") ? "text-[#5f63f2] !important" : ""
+                    }`}
+                  >
+                    Profile
+                  </Link>
+                  <Link
+                    href="/admin"
+                    className={`text-gray-700 hover:text-blue-600 ${
+                      isActive("/admin") ? "text-[#5f63f2] !important" : ""
+                    }`}
+                  >
+                    Dashboard
+                  </Link>
+                </>
+              )}
+              {user?.role === "customer" && (
+                <>
+                  <Link
+                    href="/shop"
+                    className={`text-gray-700 hover:text-blue-600 ${
+                      isActive("/shop") ? "text-[#5f63f2] !important" : ""
+                    }`}
+                  >
+                    Shop
+                  </Link>
+                  <Link
+                    href="/order"
+                    className={`text-gray-700 hover:text-blue-600 ${
+                      isActive("/order") ? "text-[#5f63f2] !important" : ""
+                    }`}
+                  >
+                    Orders
+                  </Link>
+                  <Link
+                    href="/profile"
+                    className={`text-gray-700 hover:text-blue-600 ${
+                      isActive("/profile") ? "text-[#5f63f2] !important" : ""
+                    }`}
+                  >
+                    Profile
+                  </Link>
+                </>
+              )}
             </div>
           </div>
         )}
