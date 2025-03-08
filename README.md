@@ -1,13 +1,23 @@
-# RM-Corner
+# Medicine E-Commerce Shop
 
 ![Medicine E-Commerce Shop Logo](https://via.placeholder.com/150x50?text=Medicine+Shop+Logo)  
-**Medicine E-Commerce Shop** is an online platform where users can browse, search, and purchase medicines. It provides a seamless shopping experience for customers and a robust management system for admins. Built with **Next.js**, **TypeScript**, and **Tailwind CSS**, this project ensures a modern, responsive, and secure user interface.
+The **Medicine E-Commerce Shop** is an online platform where users can browse, search, and purchase medicines. It provides a seamless shopping experience for customers and a robust management system for admins. Built with **Next.js**, **Node.js**, **Express**, and **MongoDB**, this project ensures a modern, responsive, and secure user interface.
 
 ---
 
-## 🚀 Live Demo
+## 🚀 Live Deployment
 
-- **RM-Corner**: [https://medicine-shop.vercel.app](https://medicine-client-rust.vercel.app/)
+- **Frontend**: [https://medicine-shop.vercel.app](https://medicine-shop.vercel.app)
+- **Backend API**: [https://medicine-shop-api.vercel.app](https://medicine-shop-api.vercel.app)
+
+---
+
+## 🔑 Admin Credentials
+
+For testing purposes, use the following admin credentials:
+
+- **Email**: `ruhitbaidya01@gmail.com`
+- **Password**: `123456`
 
 ---
 
@@ -75,6 +85,18 @@
 
 ---
 
-```
+## 🛠️ Setup Instructions
 
-```
+### Prerequisites:
+
+- Node.js (v16 or higher)
+- MongoDB Atlas or local MongoDB instance
+- npm or yarn
+
+### Steps:
+
+1. **Clone the Repository**:
+   ```bash
+   frontend git clone https://github.com/ruhitbaidya/medicine-shop-client.git
+   backend git clone https://github.com/ruhitbaidya/medicine-shop-server.git
+   ```
