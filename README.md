@@ -7,8 +7,9 @@ The **Medicine E-Commerce Shop** is an online platform where users can browse, s
 
 ## 🚀 Live Deployment
 
-- **Frontend**: [https://medicine-shop.vercel.app](https://medicine-shop.vercel.app)
-- **Backend API**: [https://medicine-shop-api.vercel.app](https://medicine-shop-api.vercel.app)
+- **Live**: [https://medicine-client-rust.vercel.app/](https://medicine-client-rust.vercel.app/)
+
+---
 
 ---
 
