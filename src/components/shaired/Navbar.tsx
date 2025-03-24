@@ -7,10 +7,10 @@ import { getUser } from "../getUser/userFound";
 import { usePathname } from "next/navigation"; // Add usePathname
 import CardProfile from "./CardProfile";
 import { TUserIn } from "@/app/types/medicinestype";
-
+import { IoIosArrowDown } from "react-icons/io";
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+  const [meMenu, setMeMenu] = useState(false);
   const [user, setUser] = useState<TUserIn | undefined | null>(null);
   const pathname = usePathname();
 
@@ -31,8 +31,8 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-white shadow-md">
-      <div className="container mx-auto px-4 py-[15px]">
+    <nav className="bg-white shadow-md fixed top-0 left-0 w-full z-10 overflow-hidden">
+      <div className="container mx-auto px-4 py-[15px] relative">
         <div className="flex justify-between items-center h-16">
           <Link href="/">
             <Logo />
@@ -56,6 +56,30 @@ const Navbar = () => {
               } flex gap-[25px] items-center`}
             >
               <Link
+                href="/"
+                className={`text-gray-700 hover:text-blue-600 ${
+                  isActive("/shop") ? "text-[#5f63f2] !important" : ""
+                }`}
+              >
+                Home
+              </Link>
+              <Link
+                href="/shop"
+                className={`text-gray-700 hover:text-blue-600 ${
+                  isActive("/shop") ? "text-[#5f63f2] !important" : ""
+                }`}
+              >
+                Shop
+              </Link>
+              <Link
+                onClick={() => setMeMenu(!meMenu)}
+                href="#"
+                className={`text-gray-700 font-normal flex justify-between items-center gap-[5px]`}
+              >
+                <>Medicine</>
+                <IoIosArrowDown />
+              </Link>
+              <Link
                 href="/login"
                 className={`text-gray-700 hover:text-blue-600 ${
                   isActive("/admin") ? "text-[#5f63f2] !important" : ""
@@ -68,12 +92,12 @@ const Navbar = () => {
             {user?.role === "admin" && (
               <>
                 <Link
-                  href="/shop"
+                  href="/"
                   className={`text-gray-700 hover:text-blue-600 ${
-                    isActive("/shop") ? "text-[#5f63f2] !important" : ""
+                    isActive("/") ? "text-[#5f63f2] !important" : ""
                   }`}
                 >
-                  Shop
+                  Home
                 </Link>
                 <Link
                   href="/order"
@@ -82,6 +106,22 @@ const Navbar = () => {
                   }`}
                 >
                   Orders
+                </Link>
+                <Link
+                  href="/shop"
+                  className={`text-gray-700 hover:text-blue-600 ${
+                    isActive("/shop") ? "text-[#5f63f2] !important" : ""
+                  }`}
+                >
+                  Shop
+                </Link>
+                <Link
+                  onClick={() => setMeMenu(!meMenu)}
+                  href="#"
+                  className={`text-gray-700 font-normal flex justify-between items-center gap-[5px]`}
+                >
+                  <>Medicine</>
+                  <IoIosArrowDown />
                 </Link>
                 <Link
                   href="/profile"
@@ -105,14 +145,6 @@ const Navbar = () => {
             {user?.role === "customer" && (
               <>
                 <Link
-                  href="/shop"
-                  className={`text-gray-700 hover:text-blue-600 ${
-                    isActive("/shop") ? "text-[#5f63f2] !important" : ""
-                  }`}
-                >
-                  Shop
-                </Link>
-                <Link
                   href="/order"
                   className={`text-gray-700 hover:text-blue-600 ${
                     isActive("/order") ? "text-[#5f63f2] !important" : ""
@@ -135,6 +167,75 @@ const Navbar = () => {
           </div>
         </div>
 
+        {/* therre add mega menu icons and text */}
+
+        <div className={`${meMenu ? "" : "hidden"} mt-[30px]`}>
+          <div>
+            <div className="grid grid-cols-3 gap-[25px]">
+              <div className="border-l-2 pl-6">
+                <h5 className="font-bold">Injectable Formulations</h5>
+                <ul>
+                  <li>
+                    <Link href="#">Intravenous (IV) Injections</Link>
+                  </li>
+                  <li>
+                    <Link href="#">Intramuscular (IM) Injections</Link>
+                  </li>
+                  <li>
+                    <Link href="#">Subcutaneous (SC) Injections</Link>
+                  </li>
+                  <li>
+                    <Link href="#">Intradermal (ID) Injections</Link>
+                  </li>
+                  <li>
+                    <Link href="#">Intrathecal/Spinal Injections</Link>
+                  </li>
+                </ul>
+              </div>
+              <div className="border-l-2 pl-6">
+                <h5 className="font-bold">Topical Formulations</h5>
+                <ul>
+                  <li>
+                    <Link href="#">Ointments/Creams</Link>
+                  </li>
+                  <li>
+                    <Link href="#">Gels</Link>
+                  </li>
+                  <li>
+                    <Link href="#">Patches</Link>
+                  </li>
+                  <li>
+                    <Link href="#">Eye/Ear Drops</Link>
+                  </li>
+                </ul>
+              </div>
+              <div className="border-l-2 pl-6">
+                <h5 className="font-bold">Other Specialized Forms</h5>
+                <ul>
+                  <li>
+                    <Link href="#">Suppositories</Link>
+                  </li>
+                  <li>
+                    <Link href="#">Nebulizer Solutions</Link>
+                  </li>
+                  <li>
+                    <Link href="#">Implants</Link>
+                  </li>
+                  <li>
+                    <Link href="#">Powders for Reconstitution</Link>
+                  </li>
+                  <li>
+                    <Link href="#">Nasal Sprays</Link>
+                  </li>
+                  <li>
+                    <Link href="#">Inhalers</Link>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
         {isMenuOpen && (
           <div className="md:hidden">
             <div className="flex flex-col space-y-4 mt-4 pb-4">
@@ -143,6 +244,14 @@ const Navbar = () => {
                   user?.role ? "hidden" : ""
                 } flex gap-[25px] items-center`}
               >
+                <Link
+                  href="/shop"
+                  className={`text-gray-700 hover:text-blue-600 ${
+                    isActive("/shop") ? "text-[#5f63f2] !important" : ""
+                  }`}
+                >
+                  Shop
+                </Link>
                 <Link
                   href="/login"
                   className={`text-gray-700 hover:text-blue-600 ${
