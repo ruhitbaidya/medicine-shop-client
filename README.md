@@ -1,13 +1,13 @@
-# Medicine E-Commerce Shop
+# Medicine E-Commerce Shop (Frontend)
 
-![Medicine E-Commerce Shop Logo](https://via.placeholder.com/150x50?text=Medicine+Shop+Logo)  
 The **Medicine E-Commerce Shop** is an online platform where users can browse, search, and purchase medicines. It provides a seamless shopping experience for customers and a robust management system for admins. Built with **Next.js**, **Node.js**, **Express**, and **MongoDB**, this project ensures a modern, responsive, and secure user interface.
 
 ---
 
 ## 🚀 Live Deployment
 
-- **Live**: [https://medicine-client-rust.vercel.app/](https://medicine-client-rust.vercel.app/)
+- **Frondend Live**: [https://medicine-client-rust.vercel.app/](https://medicine-client-rust.vercel.app/)
+- **Backend Live**: [https://medicine-server-one.vercel.app/](https://medicine-server-one.vercel.app/)
 
 ---
 
