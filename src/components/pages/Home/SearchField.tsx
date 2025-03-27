@@ -15,7 +15,7 @@ const SearchField = () => {
     console.log(res);
   };
   return (
-    <div className="py-[60px]">
+    <div className="py-[30px]">
       <div className="container mx-auto px-[10px]">
         <div>
           <h2 className="text-center text-3xl mb-[20px] font-bold text-black">

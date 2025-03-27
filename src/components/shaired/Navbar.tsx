@@ -176,19 +176,44 @@ const Navbar = () => {
                 <h5 className="font-bold">Injectable Formulations</h5>
                 <ul>
                   <li>
-                    <Link href="#">Intravenous (IV) Injections</Link>
+                    <Link
+                      href="/shop?name=Intravenous"
+                      onClick={() => setMeMenu(false)}
+                    >
+                      Intravenous (IV) Injections
+                    </Link>
                   </li>
                   <li>
-                    <Link href="#">Intramuscular (IM) Injections</Link>
+                    <Link
+                      href="/shop?name=Intramuscular"
+                      onClick={() => setMeMenu(false)}
+                    >
+                      Intramuscular (IM) Injections
+                    </Link>
                   </li>
                   <li>
-                    <Link href="#">Subcutaneous (SC) Injections</Link>
+                    <Link
+                      href="/shop?name=Subcutaneous"
+                      onClick={() => setMeMenu(false)}
+                    >
+                      Subcutaneous (SC) Injections
+                    </Link>
                   </li>
                   <li>
-                    <Link href="#">Intradermal (ID) Injections</Link>
+                    <Link
+                      href="/shop?name=Intradermal"
+                      onClick={() => setMeMenu(false)}
+                    >
+                      Intradermal (ID) Injections
+                    </Link>
                   </li>
                   <li>
-                    <Link href="#">Intrathecal/Spinal Injections</Link>
+                    <Link
+                      href="/shop?name=Intrathecal"
+                      onClick={() => setMeMenu(false)}
+                    >
+                      Intrathecal/Spinal Injections
+                    </Link>
                   </li>
                 </ul>
               </div>
@@ -196,16 +221,36 @@ const Navbar = () => {
                 <h5 className="font-bold">Topical Formulations</h5>
                 <ul>
                   <li>
-                    <Link href="#">Ointments/Creams</Link>
+                    <Link
+                      href="/shop?name=Ointments"
+                      onClick={() => setMeMenu(false)}
+                    >
+                      Ointments/Creams
+                    </Link>
                   </li>
                   <li>
-                    <Link href="#">Gels</Link>
+                    <Link
+                      href="/shop?name=Gels"
+                      onClick={() => setMeMenu(false)}
+                    >
+                      Gels
+                    </Link>
                   </li>
                   <li>
-                    <Link href="#">Patches</Link>
+                    <Link
+                      href="/shop?name=Patches"
+                      onClick={() => setMeMenu(false)}
+                    >
+                      Patches
+                    </Link>
                   </li>
                   <li>
-                    <Link href="#">Eye/Ear Drops</Link>
+                    <Link
+                      href="/shop?name=EarDrops"
+                      onClick={() => setMeMenu(false)}
+                    >
+                      Eye/Ear Drops
+                    </Link>
                   </li>
                 </ul>
               </div>
@@ -213,22 +258,52 @@ const Navbar = () => {
                 <h5 className="font-bold">Other Specialized Forms</h5>
                 <ul>
                   <li>
-                    <Link href="#">Suppositories</Link>
+                    <Link
+                      href="/shop?name=Suppositories"
+                      onClick={() => setMeMenu(false)}
+                    >
+                      Suppositories
+                    </Link>
                   </li>
                   <li>
-                    <Link href="#">Nebulizer Solutions</Link>
+                    <Link
+                      href="/shop?name=Nebulizer"
+                      onClick={() => setMeMenu(false)}
+                    >
+                      Nebulizer Solutions
+                    </Link>
                   </li>
                   <li>
-                    <Link href="#">Implants</Link>
+                    <Link
+                      href="/shop?name=Implants"
+                      onClick={() => setMeMenu(false)}
+                    >
+                      Implants
+                    </Link>
                   </li>
                   <li>
-                    <Link href="#">Powders for Reconstitution</Link>
+                    <Link
+                      href="/shop?name=Powders"
+                      onClick={() => setMeMenu(false)}
+                    >
+                      Powders for Reconstitution
+                    </Link>
                   </li>
                   <li>
-                    <Link href="#">Nasal Sprays</Link>
+                    <Link
+                      href="/shop?name=Nasal"
+                      onClick={() => setMeMenu(false)}
+                    >
+                      Nasal Sprays
+                    </Link>
                   </li>
                   <li>
-                    <Link href="#">Inhalers</Link>
+                    <Link
+                      href="/shop?name=Inhalers"
+                      onClick={() => setMeMenu(false)}
+                    >
+                      Inhalers
+                    </Link>
                   </li>
                 </ul>
               </div>

@@ -1,34 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { useState, useEffect } from "react";
-
 const MedicineDiscountSection = () => {
-  // Countdown timer state (24 hours)
-  const [timeLeft, setTimeLeft] = useState({
-    hours: 23,
-    minutes: 59,
-    seconds: 59,
-  });
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setTimeLeft((prev) => {
-        const seconds = prev.seconds - 1;
-        const minutes = seconds < 0 ? prev.minutes - 1 : prev.minutes;
-        const hours = minutes < 0 ? prev.hours - 1 : prev.hours;
-
-        return {
-          hours: hours < 0 ? 23 : hours,
-          minutes: minutes < 0 ? 59 : minutes,
-          seconds: seconds < 0 ? 59 : seconds,
-        };
-      });
-    }, 1000);
-
-    return () => clearInterval(timer);
-  }, []);
-
   const discountMedicines = [
     {
       id: 1,
@@ -54,7 +27,7 @@ const MedicineDiscountSection = () => {
   ];
 
   return (
-    <section className="py-16 bg-gradient-to-r from-[var(--primary-light)] to-white overflow-hidden">
+    <section className="py-7 bg-gradient-to-r from-[var(--primary-light)] to-white overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header with Timer */}
         <div className="text-center mb-12">
@@ -62,22 +35,6 @@ const MedicineDiscountSection = () => {
             <span className="px-4 py-1 text-sm font-semibold text-white bg-[var(--primary-color)] rounded-full">
               Flash Sale
             </span>
-            <div className="ml-4 flex items-center bg-white shadow-sm rounded-full px-4 py-1">
-              <span className="text-[var(--primary-color)] font-bold mr-1">
-                Ends in:
-              </span>
-              <span className="bg-[var(--primary-color)] text-white px-2 py-1 rounded mx-1 min-w-[24px] text-center">
-                {timeLeft.hours.toString().padStart(2, "0")}
-              </span>
-              <span className="text-[var(--primary-color)]">:</span>
-              <span className="bg-[var(--primary-color)] text-white px-2 py-1 rounded mx-1 min-w-[24px] text-center">
-                {timeLeft.minutes.toString().padStart(2, "0")}
-              </span>
-              <span className="text-[var(--primary-color)]">:</span>
-              <span className="bg-[var(--primary-color)] text-white px-2 py-1 rounded mx-1 min-w-[24px] text-center">
-                {timeLeft.seconds.toString().padStart(2, "0")}
-              </span>
-            </div>
           </div>
           <h2 className="text-3xl md:text-4xl font-bold text-[var(--text-color)] mb-3">
             Todays{" "}
@@ -114,26 +71,6 @@ const MedicineDiscountSection = () => {
                   <p className="text-md text-gray-500 line-through">
                     ${medicine.originalPrice}
                   </p>
-                </div>
-
-                {/* Timer for this product */}
-                <div className="flex items-center text-sm text-[var(--secondary-color)] mb-4">
-                  <svg
-                    className="w-4 h-4 mr-1 text-[var(--primary-color)]"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                    ></path>
-                  </svg>
-                  <span>
-                    Offer ends in {timeLeft.hours}h {timeLeft.minutes}m
-                  </span>
                 </div>
 
                 {/* Add to Cart Button */}

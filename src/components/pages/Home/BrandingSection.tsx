@@ -22,9 +22,9 @@ const BrandingSection = () => {
   }, [medicines.length]); // Add `medicines.length` to the dependency array
 
   return (
-    <div className="mt-[10px]">
+    <div className="">
       <div className="container mx-auto px-[10px]">
-        <div className="lg:flex justify-between items-center bannerBG p-[50px] border border-[#4a54e1] rounded-lg">
+        <div className="lg:flex justify-between items-center bannerBG p-[30px] border border-[#4a54e1] rounded-lg">
           {/* Left Section - Text Content */}
           <div className="flex-1">
             <h1 className="mb-[20px] text-[25px] lg:text-5xl font-bold">

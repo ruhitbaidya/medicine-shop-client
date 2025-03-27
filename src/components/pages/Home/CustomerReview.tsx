@@ -62,7 +62,7 @@ const renderStars = (rating: number) => {
 
 const CustomerReviews = () => {
   return (
-    <section className="py-12 bg-[var(--background-color)]">
+    <section className="py-7 bg-[var(--background-color)]">
       <div className="container mx-auto px-6">
         {/* Section Title */}
         <div className="text-center mb-8">

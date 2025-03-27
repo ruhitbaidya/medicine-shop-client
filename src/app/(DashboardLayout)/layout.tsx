@@ -5,7 +5,8 @@ import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
 import { ReactNode, useContext, useState } from "react";
 import { FiMenu, FiHome, FiBarChart, FiUsers } from "react-icons/fi";
-
+import { CiDiscount1 } from "react-icons/ci";
+import { SiBlogger } from "react-icons/si";
 export default function Dashboard({ children }: { children: ReactNode }) {
   const { setUser, user } = useContext(ContextCreate);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -68,6 +69,26 @@ export default function Dashboard({ children }: { children: ReactNode }) {
             }`}
           >
             <FiUsers size={20} /> Users
+          </Link>
+          <Link
+            href="/admin/createDiscount"
+            className={`flex items-center gap-2 p-2 rounded-lg ${
+              isActive("/admin/createDiscount")
+                ? "bg-[#5f63f2] text-white"
+                : "hover:bg-gray-200"
+            }`}
+          >
+            <CiDiscount1 size={20} /> Discounts
+          </Link>
+          <Link
+            href="/admin/blogs"
+            className={`flex items-center gap-2 p-2 rounded-lg ${
+              isActive("/admin/blogs")
+                ? "bg-[#5f63f2] text-white"
+                : "hover:bg-gray-200"
+            }`}
+          >
+            <SiBlogger size={20} /> Blog
           </Link>
         </nav>
       </div>

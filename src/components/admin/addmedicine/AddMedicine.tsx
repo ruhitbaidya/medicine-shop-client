@@ -1,5 +1,7 @@
 "use client";
 import { postApi } from "@/components/api/apiCom";
+import Image from "next/image";
+import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "sonner";
 
@@ -21,6 +23,8 @@ export interface MedicineFormData {
 }
 
 const MedicineForm = () => {
+  const [image, setImage] = useState<File | null>(null);
+  const [perview, setPreview] = useState<string | null>("");
   const {
     register,
     handleSubmit,
@@ -38,7 +42,7 @@ const MedicineForm = () => {
     }
     console.log(res);
   };
-
+  console.log(image);
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
@@ -49,6 +53,39 @@ const MedicineForm = () => {
       </h2>
 
       {/* Medicine Name */}
+      <div className="flex justify-between items-center gap-[25px]">
+        <div>
+          <label
+            htmlFor="name"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Medicine Image
+          </label>
+          <input
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              const files = e.target.files?.[0];
+              if (!files) {
+                setPreview(null);
+                return;
+              }
+              setPreview(URL.createObjectURL(files));
+              setImage(files);
+            }}
+            type="file"
+            id="name"
+            className="mt-1  p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+          />
+        </div>
+        <div>
+          <Image
+            width={300}
+            height={150}
+            className="w-full h-[200px]"
+            src={perview as string}
+            alt="No Image"
+          />
+        </div>
+      </div>
       <div>
         <label
           htmlFor="name"

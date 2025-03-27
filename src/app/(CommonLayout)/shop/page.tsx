@@ -7,10 +7,12 @@ import Spinner from "@/components/shaired/spinner";
 import { ContextCreate } from "@/Context/ContextProvide";
 
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
 import { FaBangladeshiTakaSign } from "react-icons/fa6";
 
 const Shop = () => {
+  const params = useSearchParams();
   const [slideLow, setSlideLow] = useState<number | null>(0);
   const [slideHigh, setSlideHigh] = useState<number | null>(0);
   const { card, setCard } = useContext(ContextCreate);
@@ -34,14 +36,17 @@ const Shop = () => {
   const handelChange = async (val: any) => {
     setLoading(true);
     const res = await postApi(`${process.env.NEXT_PUBLIC_API_URL}/filter`, val);
-    if (res.data) {
+    if (res?.data) {
       setMData(res.data);
       setLoading(false);
     }
   };
   useEffect(() => {
     getAllMedi();
-  }, []);
+    const texts = params.get("name");
+    console.log(texts);
+    handelChange({ category: texts });
+  }, [params]);
   return (
     <>
       <div className="mt-[30px]">
