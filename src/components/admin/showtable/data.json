@@ -1,0 +1,326 @@
+[
+    {
+      "name": "PainRelief Plus",
+      "description": "PainRelief Plus is a fast-acting pain relief medication designed to target and reduce muscle and joint pain. Whether you're suffering from arthritis, muscle strains, or inflammation, PainRelief Plus works by easing discomfort and providing long-lasting relief. It combines powerful pain-relieving ingredients to tackle both acute and chronic pain. The medication is safe for long-term use when taken as directed, and it is suitable for individuals with an active lifestyle or those experiencing age-related pain.",
+      "price": 450,
+      "discount": false,
+      "expiry_date": "2026-02-25T00:00:00.000Z",
+      "image": "https://i.ibb.co/4wLm21g2/medicines.jpg",
+      "manufacturer_details": {
+        "name": "HealthPro Pharma",
+        "address": "London, UK",
+        "contact": "+44-20-7946-0958"
+      },
+      "_id": "a1d9e7f4a3f34b2491f3a3451b578b3c",
+      "required_prescription": true,
+      "stock_availability": 1200
+    },
+    {
+      "name": "ColdCure Syrup",
+      "description": "ColdCure Syrup is a natural remedy made to alleviate common cold symptoms. It helps to reduce a sore throat, congestion, and coughing. With ingredients such as honey, ginger, and vitamin C, it provides relief and boosts the immune system. ColdCure Syrup is gentle enough for children but effective for all ages, making it a great choice during cold and flu seasons. For best results, take the syrup regularly as directed by your healthcare provider.",
+      "price": 250,
+      "discount": false,
+      "expiry_date": "2025-12-10T00:00:00.000Z",
+      "image": "https://i.ibb.co/4wLm21g2/medicines.jpg",
+      "manufacturer_details": {
+        "name": "MediCare Solutions",
+        "address": "Sydney, Australia",
+        "contact": "+61-2-9123-4567"
+      },
+      "_id": "b3d04e4b1d1c4dba96a44d15a3f4e2f5",
+      "required_prescription": false,
+      "stock_availability": 1500
+    },
+    {
+      "name": "ImmunoBoost Tablets",
+      "description": "ImmunoBoost Tablets are designed to enhance your immune system, helping your body to fight infections more effectively. With key ingredients like Vitamin C, zinc, and echinacea, it strengthens your body’s natural defenses. Whether you are looking to prevent illness or recover faster, ImmunoBoost provides support during flu season or times of high stress. It is perfect for individuals with a busy lifestyle who need an extra immune boost.",
+      "price": 350,
+      "discount": true,
+      "expiry_date": "2025-08-01T00:00:00.000Z",
+      "image": "https://i.ibb.co/4wLm21g2/medicines.jpg",
+      "manufacturer_details": {
+        "name": "Wellness Labs",
+        "address": "New York, USA",
+        "contact": "+1-800-555-5678"
+      },
+      "_id": "d4a5b8c39fd84fa1b9e1eaf5e6ac50e9",
+      "required_prescription": false,
+      "stock_availability": 1000
+    },
+    {
+      "name": "LiverDetox Capsules",
+      "description": "LiverDetox Capsules are formulated with powerful herbs and antioxidants designed to cleanse and support liver function. Ingredients like milk thistle and turmeric help detoxify the liver, promoting healthy digestion and reducing the load on the liver. This supplement is ideal for individuals looking to maintain a healthy liver, especially those with unhealthy habits or a history of liver issues. Regular use can help support overall wellness and boost energy levels.",
+      "price": 400,
+      "discount": false,
+      "expiry_date": "2025-11-15T00:00:00.000Z",
+      "image": "https://i.ibb.co/4wLm21g2/medicines.jpg",
+      "manufacturer_details": {
+        "name": "GreenLeaf Remedies",
+        "address": "Vancouver, Canada",
+        "contact": "+1-604-555-2222"
+      },
+      "_id": "e6d3f1c78d1d408ab2be7b36b2c5d609",
+      "required_prescription": false,
+      "stock_availability": 1300
+    },
+    {
+      "name": "ClearSkin Acne Cream",
+      "description": "ClearSkin Acne Cream is a fast-acting topical solution that helps to clear acne and prevent future breakouts. Formulated with salicylic acid, tea tree oil, and benzoyl peroxide, it tackles acne-causing bacteria, reduces inflammation, and helps prevent clogged pores. Whether dealing with occasional pimples or persistent acne, ClearSkin provides quick relief. It’s ideal for all skin types and leaves your skin feeling smooth and refreshed. Use it as part of your daily skincare routine for best results.",
+      "price": 200,
+      "discount": true,
+      "expiry_date": "2025-09-30T00:00:00.000Z",
+      "image": "https://i.ibb.co/4wLm21g2/medicines.jpg",
+      "manufacturer_details": {
+        "name": "PureDerm Solutions",
+        "address": "Paris, France",
+        "contact": "+33-1-40-20-30-40"
+      },
+      "_id": "c8e3f73c3f06445c96a9a837b542c3e8",
+      "required_prescription": false,
+      "stock_availability": 950
+    },
+    {
+      "name": "HeartCare Tablets",
+      "description": "HeartCare Tablets are designed to support cardiovascular health. Packed with essential nutrients such as omega-3 fatty acids, garlic extract, and CoQ10, this supplement helps manage blood pressure, cholesterol levels, and overall heart health. Regular use of HeartCare can help prevent heart disease, improve circulation, and lower the risk of stroke. Ideal for those with a family history of heart issues or individuals looking to improve their heart health as they age.",
+      "price": 450,
+      "discount": false,
+      "expiry_date": "2026-03-01T00:00:00.000Z",
+      "image": "https://i.ibb.co/4wLm21g2/medicines.jpg",
+      "manufacturer_details": {
+        "name": "CardioCare Pharma",
+        "address": "Boston, USA",
+        "contact": "+1-617-555-3456"
+      },
+      "_id": "d7b8e6c3a9a34b7e8a6a438b28b30a2c",
+      "required_prescription": true,
+      "stock_availability": 850
+    },
+    {
+      "name": "JointEase Tablets",
+      "description": "JointEase Tablets are designed to alleviate joint pain and stiffness, especially for individuals suffering from osteoarthritis, rheumatoid arthritis, or general wear and tear. The tablets are formulated with glucosamine, chondroitin, and turmeric, which support cartilage repair and reduce inflammation. Regular use of JointEase promotes better flexibility and mobility in the joints. For anyone looking to improve joint health or reduce discomfort during physical activity, JointEase is a must-have supplement.",
+      "price": 300,
+      "discount": false,
+      "expiry_date": "2025-10-15T00:00:00.000Z",
+      "image": "https://i.ibb.co/4wLm21g2/medicines.jpg",
+      "manufacturer_details": {
+        "name": "FlexCare Pharmaceuticals",
+        "address": "Berlin, Germany",
+        "contact": "+49-30-123-4567"
+      },
+      "_id": "e8a3cfe768ca4c46b0b5ad33e8ec92d9",
+      "required_prescription": true,
+      "stock_availability": 1100
+    },
+    {
+      "name": "SleepWell Tablets",
+      "description": "SleepWell Tablets provide a natural solution for those who struggle with sleep disorders, including insomnia. These tablets are formulated with melatonin, valerian root, and magnesium to promote relaxation, calm the mind, and regulate sleep cycles. By improving the quality of your sleep, SleepWell helps you feel more rested and energized during the day. Ideal for individuals with occasional sleep problems, it is a safe and effective way to regain restful sleep.",
+      "price": 350,
+      "discount": false,
+      "expiry_date": "2025-07-01T00:00:00.000Z",
+      "image": "https://i.ibb.co/4wLm21g2/medicines.jpg",
+      "manufacturer_details": {
+        "name": "RelaxPharma",
+        "address": "Los Angeles, USA",
+        "contact": "+1-323-555-6789"
+      },
+      "_id": "f3c34eb826aa4c49ad927e213b7e9e87",
+      "required_prescription": false,
+      "stock_availability": 950
+    },
+    {
+      "name": "MigraineRelief Plus",
+      "description": "MigraineRelief Plus is a targeted treatment for those suffering from chronic or episodic migraines. Formulated with a combination of anti-inflammatory agents and pain relievers, it helps reduce migraine intensity and frequency. This medication works by alleviating the severe headache, nausea, and light sensitivity that come with migraines. MigraineRelief Plus is an effective solution for individuals who want to manage their migraine symptoms and regain control of their day-to-day activities.",
+      "price": 500,
+      "discount": false,
+      "expiry_date": "2025-10-05T00:00:00.000Z",
+      "image": "https://i.ibb.co/4wLm21g2/medicines.jpg",
+      "manufacturer_details": {
+        "name": "NeuroCare Pharmaceuticals",
+        "address": "Chicago, USA",
+        "contact": "+1-312-555-7890"
+      },
+      "_id": "c5b10d9e2f1b4778b7d9e40d7a739f9d",
+      "required_prescription": true,
+      "stock_availability": 800
+    },
+    {
+      "name": "StomachEase Tablets",
+      "description": "StomachEase Tablets are designed to relieve indigestion, bloating, and stomach discomfort. Formulated with natural ingredients like peppermint, ginger, and fennel, they help calm the digestive system and promote healthy digestion. Ideal for individuals with occasional stomach upset or those who suffer from chronic digestive issues. StomachEase provides fast relief without causing drowsiness or other side effects. Take one tablet after meals for optimal comfort and digestive health.",
+      "price": 250,
+      "discount": true,
+      "expiry_date": "2025-08-10T00:00:00.000Z",
+      "image": "https://i.ibb.co/4wLm21g2/medicines.jpg",
+      "manufacturer_details": {
+        "name": "DigestCare Pharmaceuticals",
+        "address": "Toronto, Canada",
+        "contact": "+1-416-555-1234"
+      },
+      "_id": "a1e6b0d4f0ad49a599c5fe34c9a3a22d",
+      "required_prescription": false,
+      "stock_availability": 1300
+    },
+    {
+      "name": "CoughGuard Syrup",
+      "description": "CoughGuard Syrup is an effective solution for treating both dry and productive coughs. It soothes throat irritation, loosens mucus, and provides relief from persistent coughing. With a blend of honey, menthol, and eucalyptus, it helps clear the airways and provides a cooling effect to reduce coughing fits. Perfect for use during the cold and flu season or whenever you have a lingering cough. For best results, take it as directed and drink plenty of fluids.",
+      "price": 280,
+      "discount": false,
+      "expiry_date": "2025-11-20T00:00:00.000Z",
+      "image": "https://i.ibb.co/4wLm21g2/medicines.jpg",
+      "manufacturer_details": {
+        "name": "CoughCare Pharma",
+        "address": "Madrid, Spain",
+        "contact": "+34-91-555-6789"
+      },
+      "_id": "f5f38a3a9e1d4f7b8b20d50ba88be65f",
+      "required_prescription": false,
+      "stock_availability": 1200
+    },
+    {
+        "name": "ProBioFlora Capsules",
+        "description": "ProBioFlora Capsules are a blend of essential probiotics designed to support gut health and balance the microbiome. These capsules help with digestion, improve immune function, and can relieve bloating and discomfort caused by digestive issues. Ideal for individuals suffering from IBS or anyone looking to improve their overall digestive health, ProBioFlora promotes a healthy balance of good bacteria in the gut. For best results, take it regularly as part of your daily health routine.",
+        "price": 220,
+        "discount": false,
+        "expiry_date": "2025-09-30T00:00:00.000Z",
+        "image": "https://i.ibb.co/4wLm21g2/medicines.jpg",
+        "manufacturer_details": {
+          "name": "GutCare Pharmaceuticals",
+          "address": "Dallas, USA",
+          "contact": "+1-214-555-7890"
+        },
+        "_id": "3a6d9b328bc84d69b8e6c704f6b9b713",
+        "required_prescription": false,
+        "stock_availability": 1200
+      },
+      {
+        "name": "SleepRelax Tablets",
+        "description": "SleepRelax Tablets are a natural remedy for individuals struggling with sleep disorders such as insomnia. Featuring a combination of melatonin, valerian root, and chamomile, these tablets help promote relaxation and improve sleep quality. By calming the mind and promoting a peaceful sleep cycle, SleepRelax helps you wake up refreshed and energized. It is a perfect solution for those experiencing occasional sleep disturbances or stress-related insomnia.",
+        "price": 280,
+        "discount": true,
+        "expiry_date": "2025-06-15T00:00:00.000Z",
+        "image": "https://i.ibb.co/4wLm21g2/medicines.jpg",
+        "manufacturer_details": {
+          "name": "Peaceful Sleep Labs",
+          "address": "Los Angeles, USA",
+          "contact": "+1-323-555-4343"
+        },
+        "_id": "7d2c8bc94bdb44f38b42c02c29f9d61b",
+        "required_prescription": false,
+        "stock_availability": 950
+      },
+      {
+        "name": "CardioVital Tablets",
+        "description": "CardioVital Tablets are designed to enhance heart health and improve cardiovascular function. With ingredients like CoQ10, omega-3 fatty acids, and garlic extract, this supplement helps manage blood pressure, reduce cholesterol, and prevent heart disease. Ideal for individuals looking to improve heart health and reduce the risk of cardiovascular conditions, CardioVital supports better circulation, lower inflammation, and improved heart muscle function.",
+        "price": 390,
+        "discount": false,
+        "expiry_date": "2025-11-10T00:00:00.000Z",
+        "image": "https://i.ibb.co/4wLm21g2/medicines.jpg",
+        "manufacturer_details": {
+          "name": "VivaHeart Pharma",
+          "address": "Toronto, Canada",
+          "contact": "+1-416-555-6789"
+        },
+        "_id": "e3b7e2c07cd34d77a1d7ea8093f63f3d",
+        "required_prescription": true,
+        "stock_availability": 1100
+      },
+      {
+        "name": "DiabetesCare Plus",
+        "description": "DiabetesCare Plus is a dietary supplement formulated to support healthy blood sugar levels. Packed with natural ingredients like cinnamon, bitter melon, and chromium, it helps regulate glucose metabolism and improve insulin sensitivity. Ideal for individuals with type 2 diabetes or those looking to prevent blood sugar imbalances, DiabetesCare Plus provides comprehensive support to maintain healthy blood sugar levels and overall metabolic health.",
+        "price": 330,
+        "discount": true,
+        "expiry_date": "2025-12-30T00:00:00.000Z",
+        "image": "https://i.ibb.co/4wLm21g2/medicines.jpg",
+        "manufacturer_details": {
+          "name": "HealthyMetabolism Pharma",
+          "address": "London, UK",
+          "contact": "+44-20-7946-5678"
+        },
+        "_id": "5fcb3e5be2194677a89c8d1c55a441df",
+        "required_prescription": false,
+        "stock_availability": 1000
+      },
+      {
+        "name": "ImmuneBoost Capsules",
+        "description": "ImmuneBoost Capsules are formulated with a blend of vitamins, minerals, and antioxidants designed to enhance the body's immune response. Ingredients like vitamin C, zinc, and elderberry work together to improve immunity and fight off infections. This supplement is ideal for individuals looking to boost their immune system, especially during cold and flu season or times of increased stress.",
+        "price": 220,
+        "discount": false,
+        "expiry_date": "2025-07-01T00:00:00.000Z",
+        "image": "https://i.ibb.co/4wLm21g2/medicines.jpg",
+        "manufacturer_details": {
+          "name": "VitalHealth Laboratories",
+          "address": "Melbourne, Australia",
+          "contact": "+61-3-9876-5432"
+        },
+        "_id": "9a9dbb87c0f349839e9e2297e7953811",
+        "required_prescription": false,
+        "stock_availability": 1300
+      },
+      {
+        "name": "LiverGuard Tablets",
+        "description": "LiverGuard Tablets are a herbal supplement designed to detoxify the liver and support overall liver health. With ingredients like milk thistle, dandelion root, and turmeric, LiverGuard helps cleanse the liver, reduce inflammation, and support digestion. It is perfect for individuals looking to maintain liver health, detoxify after a period of unhealthy eating, or reduce liver strain caused by alcohol consumption.",
+        "price": 250,
+        "discount": false,
+        "expiry_date": "2025-08-15T00:00:00.000Z",
+        "image": "https://i.ibb.co/4wLm21g2/medicines.jpg",
+        "manufacturer_details": {
+          "name": "HerbalGuard Pharma",
+          "address": "Berlin, Germany",
+          "contact": "+49-30-555-1234"
+        },
+        "_id": "a4f89c6b81244d9b914ae44a88a837d3",
+        "required_prescription": false,
+        "stock_availability": 1200
+      },
+      {
+        "name": "JointFlex Cream",
+        "description": "JointFlex Cream is a topical analgesic designed to relieve joint pain and inflammation. With natural ingredients like menthol, camphor, and arnica, it provides soothing relief to sore muscles and stiff joints. Whether you’re experiencing pain from arthritis or recent physical activity, JointFlex Cream can help ease discomfort and increase mobility. Apply directly to the affected area for fast, targeted pain relief.",
+        "price": 180,
+        "discount": true,
+        "expiry_date": "2025-09-01T00:00:00.000Z",
+        "image": "https://i.ibb.co/4wLm21g2/medicines.jpg",
+        "manufacturer_details": {
+          "name": "FlexiCare Pharmaceuticals",
+          "address": "Zurich, Switzerland",
+          "contact": "+41-44-555-1234"
+        },
+        "_id": "b8f3c2b3f6bb40d5a6c676ca73bcd404",
+        "required_prescription": false,
+        "stock_availability": 1100
+      },
+      {
+        "name": "CoughStop Syrup",
+        "description": "CoughStop Syrup is a soothing remedy designed to reduce the severity of both dry and productive coughs. With a combination of honey, menthol, and eucalyptus, this syrup helps clear the throat and ease coughing. It’s perfect for use when you have a persistent cough due to colds, flu, or allergies. CoughStop provides quick relief and helps reduce throat irritation, so you can breathe easier and feel better.",
+        "price": 250,
+        "discount": false,
+        "expiry_date": "2025-10-20T00:00:00.000Z",
+        "image": "https://i.ibb.co/4wLm21g2/medicines.jpg",
+        "manufacturer_details": {
+          "name": "ColdCare Pharma",
+          "address": "Madrid, Spain",
+          "contact": "+34-91-555-7890"
+        },
+        "_id": "c8a56b2b33b94ed0bb7c688ce3e8d2df",
+        "required_prescription": false,
+        "stock_availability": 1300
+      },
+      {
+        "name": "EnergyBoost Tablets",
+        "description": "EnergyBoost Tablets provide a natural energy lift without the jitters associated with caffeine. Formulated with ginseng, B-vitamins, and green tea extract, these tablets help improve mental alertness, reduce fatigue, and increase stamina. Ideal for individuals who need a quick energy boost to power through a busy day or workout, EnergyBoost is the perfect solution to enhance overall performance.",
+        "price": 280,
+        "discount": true,
+        "expiry_date": "2025-07-25T00:00:00.000Z",
+        "image": "https://i.ibb.co/4wLm21g2/medicines.jpg",
+        "manufacturer_details": {
+          "name": "VitalForce Labs",
+          "address": "New York, USA",
+          "contact": "+1-800-555-1111"
+        },
+        "_id": "d7a1c46c9e1a47f3a962a45f2a9a1fbe",
+        "required_prescription": false,
+        "stock_availability": 1100
+      }  
+  ]
+  
+
+  
+   

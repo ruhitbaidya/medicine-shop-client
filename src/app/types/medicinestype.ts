@@ -10,6 +10,7 @@ export interface MedicineFormData {
   name: string;
   description: string;
   price: number;
+  image : string;
   stock_availability: number;
   required_prescription: boolean;
   manufacturer_details: ManufacturerDetails;

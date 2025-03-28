@@ -28,7 +28,7 @@ export default function MedicineTable() {
   useEffect(() => {
     dataGets();
   }, []);
-
+  console.log(medicines);
   return (
     <div className="overflow-x-auto p-4 bg-gray-100 rounded-lg shadow-sm">
       {/* Table for Larger Screens */}

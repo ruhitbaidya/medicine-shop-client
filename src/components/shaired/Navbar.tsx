@@ -177,7 +177,7 @@ const Navbar = () => {
                 <ul>
                   <li>
                     <Link
-                      href="/shop?name=Intravenous"
+                      href="/search?name=Intravenous"
                       onClick={() => setMeMenu(false)}
                     >
                       Intravenous (IV) Injections
@@ -185,7 +185,7 @@ const Navbar = () => {
                   </li>
                   <li>
                     <Link
-                      href="/shop?name=Intramuscular"
+                      href="/search?name=Intramuscular"
                       onClick={() => setMeMenu(false)}
                     >
                       Intramuscular (IM) Injections
@@ -193,7 +193,7 @@ const Navbar = () => {
                   </li>
                   <li>
                     <Link
-                      href="/shop?name=Subcutaneous"
+                      href="/search?name=Subcutaneous"
                       onClick={() => setMeMenu(false)}
                     >
                       Subcutaneous (SC) Injections
@@ -201,7 +201,7 @@ const Navbar = () => {
                   </li>
                   <li>
                     <Link
-                      href="/shop?name=Intradermal"
+                      href="/search?name=Intradermal"
                       onClick={() => setMeMenu(false)}
                     >
                       Intradermal (ID) Injections
@@ -209,7 +209,7 @@ const Navbar = () => {
                   </li>
                   <li>
                     <Link
-                      href="/shop?name=Intrathecal"
+                      href="/search?name=Intrathecal"
                       onClick={() => setMeMenu(false)}
                     >
                       Intrathecal/Spinal Injections
@@ -222,7 +222,7 @@ const Navbar = () => {
                 <ul>
                   <li>
                     <Link
-                      href="/shop?name=Ointments"
+                      href="/search?name=Ointments"
                       onClick={() => setMeMenu(false)}
                     >
                       Ointments/Creams
@@ -230,7 +230,7 @@ const Navbar = () => {
                   </li>
                   <li>
                     <Link
-                      href="/shop?name=Gels"
+                      href="/search?name=Gels"
                       onClick={() => setMeMenu(false)}
                     >
                       Gels
@@ -238,7 +238,7 @@ const Navbar = () => {
                   </li>
                   <li>
                     <Link
-                      href="/shop?name=Patches"
+                      href="/search?name=Patches"
                       onClick={() => setMeMenu(false)}
                     >
                       Patches
@@ -246,7 +246,7 @@ const Navbar = () => {
                   </li>
                   <li>
                     <Link
-                      href="/shop?name=EarDrops"
+                      href="/search?name=EarDrops"
                       onClick={() => setMeMenu(false)}
                     >
                       Eye/Ear Drops
@@ -259,7 +259,7 @@ const Navbar = () => {
                 <ul>
                   <li>
                     <Link
-                      href="/shop?name=Suppositories"
+                      href="/search?name=Suppositories"
                       onClick={() => setMeMenu(false)}
                     >
                       Suppositories
@@ -267,7 +267,7 @@ const Navbar = () => {
                   </li>
                   <li>
                     <Link
-                      href="/shop?name=Nebulizer"
+                      href="/search?name=Nebulizer"
                       onClick={() => setMeMenu(false)}
                     >
                       Nebulizer Solutions
@@ -275,7 +275,7 @@ const Navbar = () => {
                   </li>
                   <li>
                     <Link
-                      href="/shop?name=Implants"
+                      href="/search?name=Implants"
                       onClick={() => setMeMenu(false)}
                     >
                       Implants
@@ -283,7 +283,7 @@ const Navbar = () => {
                   </li>
                   <li>
                     <Link
-                      href="/shop?name=Powders"
+                      href="/search?name=Powders"
                       onClick={() => setMeMenu(false)}
                     >
                       Powders for Reconstitution
@@ -291,7 +291,7 @@ const Navbar = () => {
                   </li>
                   <li>
                     <Link
-                      href="/shop?name=Nasal"
+                      href="/search?name=Nasal"
                       onClick={() => setMeMenu(false)}
                     >
                       Nasal Sprays
@@ -299,7 +299,7 @@ const Navbar = () => {
                   </li>
                   <li>
                     <Link
-                      href="/shop?name=Inhalers"
+                      href="/search?name=Inhalers"
                       onClick={() => setMeMenu(false)}
                     >
                       Inhalers

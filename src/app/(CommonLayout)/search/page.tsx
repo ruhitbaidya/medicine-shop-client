@@ -1,27 +1,26 @@
 "use client";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { getApi } from "@/components/api/apiCom";
 import Spinner from "@/components/shaired/spinner";
 import { MedicineFormData, TCardFor } from "@/app/types/medicinestype";
 import { ContextCreate } from "@/Context/ContextProvide";
 import Link from "next/link";
 import { FaBangladeshiTakaSign } from "react-icons/fa6";
+import { useSearchParams } from "next/navigation";
 
 const SearchPage = () => {
+  const params = useSearchParams();
   const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState("");
   const { card, setCard } = useContext(ContextCreate);
   const [Mdata, setData] = useState<MedicineFormData[] | []>([]);
-  const handelSearch = async () => {
+  const handelSearch = async (search: string) => {
     setLoading(true);
     const res = await getApi(
       `${process.env.NEXT_PUBLIC_API_URL}/search/${search}`
     );
-
     setData(res.data);
     setLoading(false);
-
-    console.log(res.data);
   };
   const handelCard = (data: TCardFor) => {
     const findOne = card.find((item) => item._id === data._id);
@@ -29,6 +28,13 @@ const SearchPage = () => {
       setCard((prevCard) => [...prevCard, data]);
     }
   };
+  useEffect(() => {
+    const texts = params.get("name");
+    if (texts) {
+      handelSearch(texts);
+    }
+  }, [params]);
+
   return (
     <div>
       <div>
@@ -48,7 +54,7 @@ const SearchPage = () => {
                   placeholder="Search By Category"
                 />
                 <button
-                  onClick={handelSearch}
+                  onClick={() => handelSearch(search)}
                   className="absolute top-2 right-2 btns"
                 >
                   Search

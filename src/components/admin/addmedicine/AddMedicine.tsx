@@ -32,17 +32,35 @@ const MedicineForm = () => {
     formState: { errors },
   } = useForm<MedicineFormData>();
   const onSubmit: SubmitHandler<MedicineFormData> = async (data) => {
-    const res = await postApi(
-      `${process.env.NEXT_PUBLIC_API_URL}/create-medicine`,
-      data
-    );
-    if (res) {
-      toast.success(res.message);
-      reset();
+    if (image) {
+      const formData = new FormData();
+      formData.append("image", image);
+      console.log(image);
+      const res = await fetch(
+        `https://api.imgbb.com/1/upload?key=${process.env.NEXT_PUBLIC_IMG_BB_API_KEY}`,
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
+      const result = await res.json();
+      if (result.data.display_url) {
+        const res = await postApi(
+          `${process.env.NEXT_PUBLIC_API_URL}/create-medicine`,
+          { ...data, image: result.data.display_url }
+        );
+        if (res) {
+          toast.success(res.message);
+          setPreview("");
+          reset();
+        }
+      } else {
+        toast.error("Your Image Not Upload");
+      }
+    } else {
+      toast.error("Your Image Not Select");
     }
-    console.log(res);
   };
-  console.log(image);
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
