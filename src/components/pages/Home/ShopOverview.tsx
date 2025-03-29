@@ -67,7 +67,7 @@ const ShopOverview = () => {
                 </div>
 
                 {/* Enhanced Hover Overlay - Same Text */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[var(--primary-color)] to-transparent bg-opacity-0 group-hover:bg-opacity-90 transition-all duration-500 flex items-center justify-center opacity-0 group-hover:opacity-100">
+                <div className="absolute z-10 inset-0 bg-gradient-to-t from-[var(--primary-color)] to-transparent bg-opacity-0 group-hover:bg-opacity-100 transition-all duration-500 flex items-center justify-center opacity-0 group-hover:opacity-100">
                   <div className="text-center transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
                     <span className="text-white font-semibold text-xl block mb-1">
                       View Product

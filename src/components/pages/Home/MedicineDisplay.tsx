@@ -7,13 +7,8 @@ import Link from "next/link";
 import { ContextCreate } from "@/Context/ContextProvide";
 import { TCardFor } from "@/app/types/medicinestype";
 import Image from "next/image";
-import { RxSewingPinFilled } from "react-icons/rx";
-import {
-  FaCalendarAlt,
-  FaCartPlus,
-  FaCheckCircle,
-  FaTimesCircle,
-} from "react-icons/fa";
+import { FaPrescription } from "react-icons/fa6";
+import { FaCalendarAlt, FaCartPlus } from "react-icons/fa";
 import { FaBangladeshiTakaSign } from "react-icons/fa6";
 
 interface ManufacturerDetails {
@@ -28,6 +23,7 @@ interface Medicine {
   description: string;
   price: number;
   image: string;
+  discountPercentage: number;
   stock_availability: number;
   required_prescription: boolean;
   manufacturer_details: ManufacturerDetails;
@@ -98,107 +94,95 @@ const MedicineDisplaySection = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {medicines &&
             medicines?.map((medicine: Medicine) => (
-              <Link key={medicine._id} href={`shop/${medicine._id}`}>
+              <div key={medicine._id} className="">
                 <motion.div
                   whileHover={{ y: -5 }}
                   className="bg-white rounded-2xl flex flex-col justify-between overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 group relative"
                 >
-                  {/* Image with Floating Badges */}
-                  <div className="relative h-48 overflow-hidden">
-                    <Image
-                      src={medicine.image}
-                      width={400}
-                      height={400}
-                      alt={medicine.name}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                    />
+                  <Link href={`shop/${medicine._id}`}>
+                    {/* Image with Floating Badges */}
+                    <div className="relative h-48 overflow-hidden">
+                      <Image
+                        src={medicine.image}
+                        width={400}
+                        height={400}
+                        alt={medicine.name}
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      />
 
-                    {/* Gradient Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
-
-                    {/* Badges */}
-                    <div className="absolute top-3 right-3 flex flex-col gap-2">
-                      {medicine.required_prescription && (
-                        <span className="bg-red-500/95 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-md backdrop-blur-sm">
-                          <RxSewingPinFilled className="inline mr-1" /> RX Only
-                        </span>
-                      )}
-                      <span
-                        className={`text-xs font-bold px-3 py-1.5 rounded-full shadow-md backdrop-blur-sm ${
-                          medicine.stock_availability > 0
-                            ? "bg-green-500/95 text-white"
-                            : "bg-gray-400/95 text-gray-800"
-                        }`}
-                      >
-                        {medicine.stock_availability > 0 ? (
-                          <FaCheckCircle className="inline mr-1" />
-                        ) : (
-                          <FaTimesCircle className="inline mr-1" />
-                        )}
-                        {medicine.stock_availability > 0
-                          ? "In Stock"
-                          : "Out of Stock"}
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Content Container */}
-                  <div className="p-5 flex flex-col gap-3">
-                    {/* Medicine Name */}
-                    <h3 className="text-xl font-bold text-gray-900 group-hover:text-[var(--primary-color)] transition-colors">
-                      {medicine.name}
-                    </h3>
-
-                    {/* Description */}
-                    <p className="text-gray-600 text-sm line-clamp-2 min-h-[40px]">
-                      {medicine.description}
-                    </p>
-
-                    {/* Expiry Date */}
-                    <div className="flex items-center gap-2 text-sm text-gray-500 mt-1">
-                      <FaCalendarAlt className="text-gray-400" />
-                      <span>
-                        Expires:{" "}
-                        {new Date(medicine.expiry_date).toLocaleDateString(
-                          "en-US",
-                          {
-                            month: "short",
-                            day: "numeric",
-                            year: "numeric",
-                          }
-                        )}
-                      </span>
+                      {/* Gradient Overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
                     </div>
 
-                    {/* Price and Actions */}
-                    <div className="mt-3 pt-3 border-t border-gray-100">
-                      <div className="flex items-center justify-between">
-                        <span className="text-2xl font-bold text-[var(--primary-color)] flex items-center">
-                          <FaBangladeshiTakaSign className="mr-1" />
-                          {medicine.price.toFixed(2)}
-                        </span>
+                    {/* Content Container */}
+                    <div className="px-5">
+                      {/* Medicine Name */}
+                      <h3 className="text-xl mt-5 font-bold text-gray-900 group-hover:text-[var(--primary-color)] transition-colors">
+                        {medicine.name}
+                      </h3>
 
-                        <div className="flex gap-2">
-                          <motion.button
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
-                            onClick={() => handelCard(medicine)}
-                            disabled={medicine.stock_availability <= 0}
-                            className={`p-2 rounded-full transition-colors ${
-                              medicine.stock_availability > 0
-                                ? "bg-[var(--primary-color)] text-white hover:bg-[var(--primary-dark)]"
-                                : "bg-gray-300 text-gray-500 cursor-not-allowed"
-                            }`}
-                            title="Add to Cart"
-                          >
-                            <FaCartPlus />
-                          </motion.button>
+                      {/* Description */}
+                      <p className="text-gray-600 text-sm line-clamp-2">
+                        {medicine.description}
+                      </p>
+
+                      {/* Expiry Date */}
+                      <div className="flex justify-between items-center gap-2 text-sm text-gray-500 mt-1">
+                        <div className="flex items-center gap-2">
+                          <FaCalendarAlt className="text-gray-400" />
+                          <span>
+                            Expires:{" "}
+                            {new Date(medicine.expiry_date).toLocaleDateString(
+                              "en-US",
+                              {
+                                month: "short",
+                                day: "numeric",
+                                year: "numeric",
+                              }
+                            )}
+                          </span>
                         </div>
+                        <div>
+                          {medicine.required_prescription ? (
+                            <FaPrescription
+                              className="text-[var(--primary-color)]"
+                              size={20}
+                            />
+                          ) : (
+                            ""
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  </Link>
+                  {/* Price and Actions */}
+                  <div className="mt-3 pt-3 border-t border-gray-100 p-5">
+                    <div className="flex items-center justify-between">
+                      <span className="text-2xl font-bold text-[var(--primary-color)] flex items-center">
+                        <FaBangladeshiTakaSign className="mr-1" />
+                        {medicine.price.toFixed(2)}
+                      </span>
+
+                      <div className="flex gap-2">
+                        <motion.button
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
+                          onClick={() => handelCard(medicine)}
+                          disabled={medicine.stock_availability <= 0}
+                          className={`p-2 rounded-full transition-colors ${
+                            medicine.stock_availability > 0
+                              ? "bg-[var(--primary-color)] text-white hover:bg-[var(--primary-dark)]"
+                              : "bg-gray-300 text-gray-500 cursor-not-allowed"
+                          }`}
+                          title="Add to Cart"
+                        >
+                          <FaCartPlus />
+                        </motion.button>
                       </div>
                     </div>
                   </div>
                 </motion.div>
-              </Link>
+              </div>
             ))}
         </div>
 

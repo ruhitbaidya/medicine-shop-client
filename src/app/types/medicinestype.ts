@@ -10,7 +10,8 @@ export interface MedicineFormData {
   name: string;
   description: string;
   price: number;
-  image : string;
+  image: string;
+  discountPercentage: number | undefined;
   stock_availability: number;
   required_prescription: boolean;
   manufacturer_details: ManufacturerDetails;
@@ -34,6 +35,7 @@ export type TCard = {
 
 export type TCardFor = {
   _id?: string;
+  discountPercentage: number;
   name: string;
   price: string | number;
   stock_availability: string | number;

@@ -6,6 +6,7 @@ import Link from "next/link";
 import { TCardFor } from "@/app/types/medicinestype";
 import { FaPlus } from "react-icons/fa";
 import { FaMinus } from "react-icons/fa";
+import Discount from "@/utils/discountFun";
 const CartPage = () => {
   const { card, setCard, setCount } = useContext(ContextCreate);
   console.log(card);
@@ -34,7 +35,14 @@ const CartPage = () => {
 
   const calculateTotal = () => {
     return card.reduce(
-      (total, item) => total + (item.price as number) * (item.quantity ?? 1), // Default quantity to 1 if undefined
+      (total, item) =>
+        total +
+        ((item.discountPercentage as number) > 0
+          ? (((item.price as number) -
+              Math.round((item.price as number) / 100) *
+                item.discountPercentage) as number)
+          : (item.price as number)) *
+          (item.quantity ?? 1), // Default quantity to 1 if undefined
       0
     );
   };
@@ -79,8 +87,19 @@ const CartPage = () => {
                   </td>
                   <td className="py-4 px-6 text-lg gap-[10px]">
                     <div className="flex justify-center items-center gap-[10px]">
-                      <FaBangladeshiTakaSign size={15} />
-                      <p>{item.price}</p>
+                      {(item.discountPercentage as number) > 0 ? (
+                        <>
+                          <Discount
+                            price={item.price as number}
+                            disPrice={item.discountPercentage as number}
+                          />
+                        </>
+                      ) : (
+                        <>
+                          <FaBangladeshiTakaSign />
+                          {item.price}
+                        </>
+                      )}
                     </div>
                   </td>
                   <td className="py-4 px-6 text-lg">
@@ -106,8 +125,16 @@ const CartPage = () => {
                     </div>
                   </td>
                   <td className="py-4 px-6 text-lg">
-                    $
-                    {((item.price as number) * (item.quantity ?? 1)).toFixed(2)}
+                    <div className="flex items-center gap-[5px]">
+                      <FaBangladeshiTakaSign />
+                      <p>
+                        {item.discountPercentage > 0
+                          ? (item.price as number) -
+                            Math.round((item.price as number) / 100) *
+                              item.discountPercentage
+                          : item.price}
+                      </p>
+                    </div>
                   </td>
                   <td className="py-4 px-6 text-lg">
                     <button

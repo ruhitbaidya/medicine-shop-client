@@ -5,7 +5,8 @@ import { useParams } from "next/navigation"; // Import useParams hook
 import { MedicineFormData, TCardFor } from "@/app/types/medicinestype";
 import { getApi } from "@/components/api/apiCom";
 import { ContextCreate } from "@/Context/ContextProvide";
-
+import { FaBangladeshiTakaSign } from "react-icons/fa6";
+import Discount from "@/utils/discountFun";
 const MedicineDetails = () => {
   const { id } = useParams(); // Get the `id` directly from the dynamic route params
   const { card, setCard } = useContext(ContextCreate);
@@ -61,6 +62,7 @@ const MedicineDetails = () => {
     expiry_date,
     manufacturer_details,
     updated_at,
+    discountPercentage,
   } = datas || {};
 
   return (
@@ -78,6 +80,7 @@ const MedicineDetails = () => {
                 onClick={() =>
                   handelCard({
                     _id: datas?._id,
+                    discountPercentage: discountPercentage as number,
                     name: name as string,
                     price: price as number,
                     stock_availability: stock_availability as number,
@@ -96,7 +99,21 @@ const MedicineDetails = () => {
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
               <div className="bg-gray-50 p-4 rounded-lg">
                 <p className="text-sm font-medium text-gray-500">Price</p>
-                <p className="text-xl font-bold text-gray-800">${price}</p>
+                <p className="text-xl font-bold text-gray-800 flex items-center gap-[5px]">
+                  {(discountPercentage as number) > 0 ? (
+                    <>
+                      <Discount
+                        price={price as number}
+                        disPrice={discountPercentage as number}
+                      />
+                    </>
+                  ) : (
+                    <>
+                      <FaBangladeshiTakaSign />
+                      {price}
+                    </>
+                  )}
+                </p>
               </div>
               <div className="bg-gray-50 p-4 rounded-lg">
                 <p className="text-sm font-medium text-gray-500">
