@@ -177,6 +177,8 @@ const Shop = () => {
                       onClick={() =>
                         handelCard({
                           _id: medicine._id,
+                          discountPercentage:
+                            medicine.discountPercentage as number,
                           name: medicine.name,
                           price: medicine.price,
                           stock_availability: medicine.stock_availability,

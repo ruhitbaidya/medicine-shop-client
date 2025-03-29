@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { FaCalendarAlt, FaUser, FaArrowRight } from "react-icons/fa";
+import Image from "next/image";
 
 const MedicineBlogSection = () => {
   const blogPosts = [
@@ -70,7 +71,9 @@ const MedicineBlogSection = () => {
             >
               {/* Blog Image */}
               <div className="relative h-48 bg-gray-100">
-                <img
+                <Image
+                  height={200}
+                  width={200}
                   src={post.image}
                   alt={post.title}
                   className="w-full h-full object-cover"

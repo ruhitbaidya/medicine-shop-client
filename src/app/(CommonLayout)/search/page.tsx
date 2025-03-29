@@ -1,5 +1,5 @@
 "use client";
-import React, { useContext, useEffect, useState } from "react";
+import React, { Suspense, useContext, useEffect, useState } from "react";
 import { getApi } from "@/components/api/apiCom";
 import Spinner from "@/components/shaired/spinner";
 import { MedicineFormData, TCardFor } from "@/app/types/medicinestype";
@@ -8,7 +8,7 @@ import Link from "next/link";
 import { FaBangladeshiTakaSign } from "react-icons/fa6";
 import { useSearchParams } from "next/navigation";
 
-const SearchPage = () => {
+const SearchContent = () => {
   const params = useSearchParams();
   const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState("");
@@ -29,7 +29,7 @@ const SearchPage = () => {
     }
   };
   useEffect(() => {
-    const texts = params.get("name");
+    const texts = params.get("name") || undefined;
     if (texts) {
       handelSearch(texts);
     }
@@ -139,6 +139,14 @@ const SearchPage = () => {
         </div>
       </div>
     </div>
+  );
+};
+
+const SearchPage = () => {
+  return (
+    <Suspense fallback={<Spinner />}>
+      <SearchContent />
+    </Suspense>
   );
 };
 
