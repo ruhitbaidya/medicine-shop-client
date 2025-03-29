@@ -30,7 +30,6 @@ const OrderPagesUser = () => {
         const res = await getApi(
           `${process.env.NEXT_PUBLIC_API_URL}/getuserorder/${user?._id}`
         );
-        console.log(res);
         if (res.data.length > 0) {
           setOrders(res.data);
         } else {

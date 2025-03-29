@@ -58,7 +58,7 @@ const PrescriptionOrders = () => {
   const getAllOrder = async () => {
     try {
       const res = await getApi(`${process.env.NEXT_PUBLIC_API_URL}/getOrder`);
-      setOrders(res.data);
+      setOrders(res?.data);
     } catch (error) {
       console.error("Error fetching orders:", error);
     } finally {
