@@ -28,6 +28,7 @@ export type TUserIn = {
 export type TCard = {
   _id?: string;
   id: string;
+  discount : boolean;
   name: string;
   price: string | number;
   stock_availability: string | number;

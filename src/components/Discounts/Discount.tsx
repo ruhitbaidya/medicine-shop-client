@@ -1,26 +1,80 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import { useEffect, useState } from "react";
-import { getApi } from "../api/apiCom";
+import { getApi, patchApi } from "../api/apiCom";
 import { TCard } from "@/app/types/medicinestype";
+import { toast } from "sonner";
 
 const Discount = () => {
+  const [loading, setLoading] = useState(false);
   const [disId, setDisId] = useState<string[] | []>([]);
+  const [tempId, setTempId] = useState<string[] | []>([]);
+  const [removeids, setRemoveIds] = useState<string[] | []>([]);
+  const [disPar, setDisPar] = useState<string | null>("");
   const [allProduct, setAllProduct] = useState<TCard[] | []>([]);
   const getAllData = async () => {
     const res = await getApi(`${process.env.NEXT_PUBLIC_API_URL}/get-medicine`);
+    console.log(res);
     setAllProduct(res.data);
+    if (res.data) {
+      const fids: string[] = [];
+      res.data.map((item: any) => {
+        if (item.discount === true) {
+          return fids.push(item._id);
+        }
+      });
+      setTempId(fids);
+    }
   };
   console.log(allProduct);
   const handelIdDis = (id: string) => {
-    const finial = disId.find((item) => item === id);
+    const finial = tempId.find((item) => item === id);
     if (finial) {
-      const removeId = disId.filter((item) => item !== id);
-      setDisId(removeId);
+      setRemoveIds([...removeids, id]);
+      const removeId = tempId.filter((item) => item !== id);
+      setTempId(removeId);
       return;
     }
     setDisId([...disId, id]);
   };
-  console.log(disId);
+
+  const removerIds = async () => {
+    if (removeids.length > 0) {
+      const res = await patchApi(
+        `${process.env.NEXT_PUBLIC_API_URL}/discount-medicine-remove`,
+        { medicineId: removeids }
+      );
+      console.log(res);
+      if (res.data.modifiedCount > 0) {
+        setRemoveIds([]);
+        toast.success(res.message);
+        setLoading(false);
+      }
+    } else {
+      toast.error("id Not Select");
+    }
+  };
+  const handeDiscount = async () => {
+    await removerIds();
+    if (disId.length > 0 && disPar) {
+      setLoading(true);
+      const data = { medicineId: disId, discount: disPar };
+      const res = await patchApi(
+        `${process.env.NEXT_PUBLIC_API_URL}/discount-medicine-set`,
+        data
+      );
+      if (res.data.modifiedCount > 0) {
+        setDisPar("0");
+        toast.success(res.message);
+        setLoading(false);
+      }
+      console.log(res);
+    } else {
+      toast.error("select Id and parsent");
+    }
+  };
+  console.log("add", disId);
+  console.log("remove", removeids);
   useEffect(() => {
     getAllData();
   }, []);
@@ -35,15 +89,31 @@ const Discount = () => {
               <span className="text-indigo-800">{disId.length}</span>
             </h3>
           </div>
-          <div>
-            <label className="font-bold" htmlFor="dis">
-              Discount % Number
-            </label>
-            <input
-              className="w-full border focus:outline-none p-[10px] rounded-lg"
-              type="number"
-              placeholder="Discount % Number"
-            />
+          <div className="flex justify-between items-center gap-[10px]">
+            <div>
+              <label className="font-bold" htmlFor="dis">
+                Discount % Number
+              </label>
+              <input
+                defaultValue={disPar as string}
+                onChange={(e) => setDisPar(e.target.value)}
+                className="w-full border focus:outline-none p-[10px] rounded-lg"
+                type="number"
+                placeholder="Discount % Number"
+              />
+            </div>
+            <div>
+              <button
+                onClick={handeDiscount}
+                className="py-[10px] px-[20px] bg-indigo-600 text-white rounded-lg mt-[25px]"
+              >
+                {loading ? (
+                  <p className="text-white">Loading.....</p>
+                ) : (
+                  "Set Discount"
+                )}
+              </button>
+            </div>
           </div>
         </div>
         <div className="overflow-x-auto">
@@ -67,6 +137,7 @@ const Discount = () => {
                   <td className="px-6 py-4 whitespace-nowrap">
                     <input
                       onChange={() => handelIdDis(item?._id as string)}
+                      defaultChecked={item.discount}
                       type="checkbox"
                       className="h-4 w-4 text-blue-600 rounded focus:ring-blue-500"
                     />

@@ -51,7 +51,7 @@ const MedicineDiscountSection = () => {
             >
               {/* Discount Ribbon - More prominent */}
               {medicine.discount && (
-                <div className="absolute top-0 right-0 bg-[var(--primary-color)] text-white text-sm font-bold px-4 py-1 rounded-bl-lg z-10 shadow-md">
+                <div className="absolute top-0 right-0  bg-[var(--primary-color)] text-white text-sm font-bold px-4 py-1 rounded-bl-lg z-[5] shadow-md">
                   {medicine.discountPercentage}% OFF!
                 </div>
               )}

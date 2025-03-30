@@ -1,8 +1,35 @@
 "use client";
 import { FaPaperPlane } from "react-icons/fa";
 import { motion } from "framer-motion";
-
+import { SubmitHandler, useForm } from "react-hook-form";
+import { postApi } from "@/components/api/apiCom";
+import { useState } from "react";
+import { toast } from "sonner";
+type TSubscrribeInfo = {
+  name: string;
+  email: string;
+  profession: string;
+};
 const MedicineNewsletter = () => {
+  const [loading, setLoading] = useState(false);
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<TSubscrribeInfo>();
+  const onSubmit: SubmitHandler<TSubscrribeInfo> = async (data) => {
+    setLoading(true);
+    const res = await postApi(
+      `${process.env.NEXT_PUBLIC_API_URL}/create-suvscribe`,
+      data
+    );
+    if (res.data._id) {
+      setLoading(false);
+      toast.success(res?.message);
+      reset();
+    }
+  };
   return (
     <section className="py-16 bg-gradient-to-r from-blue-50 to-indigo-50">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -95,7 +122,7 @@ const MedicineNewsletter = () => {
                   <h3 className="text-xl font-semibold text-gray-800 mb-4">
                     Join Our Community
                   </h3>
-                  <form className="space-y-4">
+                  <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                     <div>
                       <label
                         htmlFor="name"
@@ -104,11 +131,13 @@ const MedicineNewsletter = () => {
                         Your Name
                       </label>
                       <input
+                        {...register("name", { required: true })}
                         type="text"
                         id="name"
                         placeholder="Dr. Sarah Johnson"
                         className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                       />
+                      {errors.name && <span>This field is required</span>}
                     </div>
                     <div>
                       <label
@@ -118,12 +147,14 @@ const MedicineNewsletter = () => {
                         Email Address
                       </label>
                       <input
+                        {...register("email", { required: true })}
                         type="email"
                         id="email"
                         placeholder="your@email.com"
                         className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                         required
                       />
+                      {errors.email && <span>This field is required</span>}
                     </div>
                     <div>
                       <label
@@ -133,6 +164,7 @@ const MedicineNewsletter = () => {
                         Profession
                       </label>
                       <select
+                        {...register("profession", { required: true })}
                         id="profession"
                         className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                       >
@@ -143,6 +175,7 @@ const MedicineNewsletter = () => {
                         <option value="patient">Patient/Caregiver</option>
                         <option value="other">Other</option>
                       </select>
+                      {errors.profession && <span>This field is required</span>}
                     </div>
                     <motion.button
                       whileHover={{ scale: 1.02 }}
@@ -150,7 +183,12 @@ const MedicineNewsletter = () => {
                       type="submit"
                       className="w-full py-3 px-6 bg-[var(--primary-color)] text-white font-semibold rounded-lg shadow-md hover:shadow-lg transition-all duration-300 flex items-center justify-center"
                     >
-                      Subscribe Now
+                      {loading ? (
+                        <p className="text-white">Loading....</p>
+                      ) : (
+                        "Subscribe Now"
+                      )}
+
                       <FaPaperPlane className="ml-2" />
                     </motion.button>
                   </form>
