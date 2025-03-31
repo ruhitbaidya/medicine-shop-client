@@ -10,6 +10,7 @@ import Image from "next/image";
 import { FaPrescription } from "react-icons/fa6";
 import { FaCalendarAlt, FaCartPlus } from "react-icons/fa";
 import { FaBangladeshiTakaSign } from "react-icons/fa6";
+import { mySkelaton } from "@/utils/Skilaton";
 
 interface ManufacturerDetails {
   name: string;
@@ -68,28 +69,9 @@ const MedicineDisplaySection = () => {
             High-quality medicines for your wellness journey
           </p>
         </div>
-        {loading &&
-          // Skeleton loader when data is loading
-          Array.from({ length: 4 }).map((_, index) => (
-            <div
-              key={index}
-              className="bg-white rounded-2xl overflow-hidden shadow-lg animate-pulse"
-            >
-              {/* Skeleton Header */}
-              <div className="p-6 pb-0">
-                <div className="h-4 bg-gray-200 rounded-full w-24 mb-4"></div>
-              </div>
-
-              {/* Skeleton Content */}
-              <div className="p-6 pt-4">
-                <div className="h-6 bg-gray-200 rounded-full mb-2"></div>
-                <div className="h-4 bg-gray-200 rounded-full mb-4"></div>
-                <div className="flex items-center justify-between mb-4">
-                  <div className="h-5 bg-gray-200 rounded-full w-1/4"></div>
-                </div>
-              </div>
-            </div>
-          ))}
+        {loading && (
+          <div className="grid grid-cols-3 gap-[25px]">{mySkelaton}</div>
+        )}
         {/* Medicine Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {medicines &&
@@ -122,7 +104,7 @@ const MedicineDisplaySection = () => {
                       </h3>
 
                       {/* Description */}
-                      <p className="text-gray-600 text-sm line-clamp-2">
+                      <p className="text-gray-600 my-[20px] text-sm line-clamp-2">
                         {medicine.description}
                       </p>
 
@@ -189,7 +171,7 @@ const MedicineDisplaySection = () => {
         {/* View All Button */}
         <div className="text-center mt-12">
           <Link href="/shop">
-            <button className="px-8 py-3 bg-white text-[var(--primary-color)] font-semibold rounded-lg border-2 border-[var(--primary-color)] hover:bg-[var(--primary-color)] hover:text-white transition-all shadow-sm hover:shadow-md">
+            <button className="px-8 py-3 text-white bg-[var(--primary-color)]  font-semibold rounded-lg border-2 border-[var(--primary-color)] hover:bg-[var(--primary-color)] hover:text-white transition-all shadow-sm hover:shadow-md">
               View All Medicines
             </button>
           </Link>

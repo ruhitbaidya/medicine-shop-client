@@ -2,6 +2,7 @@
 "use client";
 import { getApi } from "@/components/api/apiCom";
 import Discount from "@/utils/discountFun";
+import { mySkelaton } from "@/utils/Skilaton";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
@@ -10,16 +11,20 @@ import { FaCalendarAlt } from "react-icons/fa";
 import { FaPrescription } from "react-icons/fa6";
 const MedicineDiscountSection = () => {
   const [discountMedicines, setdiscountMedicines] = useState<any | null>([]);
-
+  const [loading, setLoading] = useState(false);
   const getDiscountMedicine = async () => {
     const res = await getApi(
       `${process.env.NEXT_PUBLIC_API_URL}/discount-medicine`
     );
     console.log(res);
-    setdiscountMedicines(res.data);
+    if (res.data) {
+      setdiscountMedicines(res.data);
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
+    setLoading(true);
     getDiscountMedicine();
   }, []);
   return (
@@ -40,9 +45,11 @@ const MedicineDiscountSection = () => {
             Limited time discounts on essential medicines
           </p>
         </div>
-
+        {loading && (
+          <div className="grid grid-cols-3 gap-[25px]">{mySkelaton}</div>
+        )}
         {/* Discount Products Grid - No Scroll */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
           {discountMedicines.map((medicine: any) => (
             <motion.div
               key={medicine?._id}
@@ -88,10 +95,12 @@ const MedicineDiscountSection = () => {
                 <h3 className="text-xl font-bold text-gray-900 mt-2 line-clamp-2">
                   {medicine.name}
                 </h3>
-                <p className="line-clamp-2">{medicine.description}</p>
+                <div className="line-clamp-2 my-[15px]">
+                  {medicine.description}
+                </div>
                 {/* Price Display */}
 
-                <div className="flex justify-between items-center">
+                <div className="space-y-3">
                   <Discount
                     price={medicine.price}
                     disPrice={medicine.discountPercentage}

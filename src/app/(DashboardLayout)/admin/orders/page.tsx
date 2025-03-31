@@ -89,12 +89,12 @@ const PrescriptionOrders = () => {
 
   const openPrescriptionModal = (prescription: string) => {
     setSelectedPrescription(prescription);
-    setImageLoading(true); // Start loading when opening the modal
+    setImageLoading(true);
   };
 
   const closePrescriptionModal = () => {
     setSelectedPrescription(null);
-    setImageLoading(false); // Reset loading state
+    setImageLoading(false);
   };
 
   return (
@@ -102,7 +102,11 @@ const PrescriptionOrders = () => {
       <h1 className="text-3xl font-bold text-gray-800 mb-8 text-center">
         Prescription Orders
       </h1>
-
+      {orders.length === 0 && (
+        <h4 className="font-bold text-3xl mt-[300px] text-center">
+          No Order Found
+        </h4>
+      )}
       {loading ? (
         <div className="flex justify-center items-center h-64">
           <Spinner />
@@ -126,7 +130,6 @@ const PrescriptionOrders = () => {
               >
                 {order.status}
               </span>
-
               {/* Order ID */}
               <div className="mb-4">
                 <span className="text-lg font-semibold text-gray-800">

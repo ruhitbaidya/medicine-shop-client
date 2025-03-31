@@ -7,6 +7,7 @@ import { ReactNode, useContext, useState } from "react";
 import { FiMenu, FiHome, FiBarChart, FiUsers } from "react-icons/fi";
 import { CiDiscount1 } from "react-icons/ci";
 import { SiBlogger } from "react-icons/si";
+import { IoIosSend } from "react-icons/io";
 export default function Dashboard({ children }: { children: ReactNode }) {
   const { setUser, user } = useContext(ContextCreate);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -22,7 +23,6 @@ export default function Dashboard({ children }: { children: ReactNode }) {
   const isActive = (path: string) => {
     return pathname === path;
   };
-  console.log(user);
   return (
     <div className="flex h-screen bg-gray-100">
       {/* Sidebar */}
@@ -89,6 +89,16 @@ export default function Dashboard({ children }: { children: ReactNode }) {
             }`}
           >
             <SiBlogger size={20} /> Blog
+          </Link>
+          <Link
+            href="/admin/subscribe"
+            className={`flex items-center gap-2 p-2 rounded-lg ${
+              isActive("/admin/subscribe")
+                ? "bg-[#5f63f2] text-white"
+                : "hover:bg-gray-200"
+            }`}
+          >
+            <IoIosSend size={20} /> Subscribe
           </Link>
         </nav>
       </div>

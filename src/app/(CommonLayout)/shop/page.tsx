@@ -5,9 +5,11 @@ import { MedicineFormData, TCardFor } from "@/app/types/medicinestype";
 import { getApi, postApi } from "@/components/api/apiCom";
 import Spinner from "@/components/shaired/spinner";
 import { ContextCreate } from "@/Context/ContextProvide";
+import Image from "next/image";
 
 import Link from "next/link";
 import { useContext, useEffect, useState } from "react";
+import { FaCalendarAlt, FaCartPlus, FaPrescription } from "react-icons/fa";
 import { FaBangladeshiTakaSign } from "react-icons/fa6";
 
 const Shop = () => {
@@ -145,50 +147,101 @@ const Shop = () => {
                 {Mdata.map((medicine) => (
                   <div
                     key={medicine._id}
-                    className="bg-white p-5 rounded-lg shadow-md hover:shadow-xl transition transform hover:-translate-y-2"
+                    className="bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-100 hover:border-gray-200"
                   >
-                    <Link title="Show Details" href={`/shop/${medicine._id}`}>
-                      <div>
-                        <h3 className="text-xl font-semibold text-[var(--text-color)] mt-4">
+                    <Link
+                      title="Show Details"
+                      href={`/shop/${medicine._id}`}
+                      className="block"
+                    >
+                      {/* Medicine Image */}
+                      <div className="h-48 bg-gray-50 relative overflow-hidden">
+                        <Image
+                          src={medicine.image || "/default-medicine.jpg"}
+                          alt={medicine.name}
+                          fill
+                          className="object-contain p-4"
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        />
+                      </div>
+
+                      {/* Card Content */}
+                      <div className="p-4">
+                        <h3 className="text-lg font-bold text-gray-800 line-clamp-2">
                           {medicine?.name}
                         </h3>
-                        <p className="text-[var(--primary-color)] font-bold mt-2 flex items-center gap-[5px]">
-                          <FaBangladeshiTakaSign />
-                          {medicine?.price}
-                        </p>
-                        <p>
-                          Prescription :{" "}
-                          {medicine.required_prescription ? "✅" : "❌"}
-                        </p>
-                        <p>
-                          ExP Date :{" "}
-                          {new Date(
-                            medicine?.expiry_date as string
-                          ).toLocaleDateString("en-US", {
-                            day: "numeric",
-                            month: "long",
-                            year: "numeric",
-                          })}
-                        </p>
+
+                        {/* Price */}
+                        <div className="mt-2 flex items-center gap-1">
+                          <FaBangladeshiTakaSign className="text-[var(--primary-color)]" />
+                          <span className="text-lg font-bold text-[var(--primary-color)]">
+                            {medicine?.price}
+                          </span>
+                          {(medicine?.discountPercentage as number) > 0 ? (
+                            <span className="ml-2 px-2 py-0.5 bg-red-100 text-red-600 text-xs rounded-full">
+                              {medicine.discountPercentage}% OFF
+                            </span>
+                          ) : (
+                            ""
+                          )}
+                        </div>
+
+                        {/* Details */}
+                        <div className="mt-3 space-y-2 text-sm text-gray-600">
+                          <div className="flex items-center gap-2">
+                            <FaPrescription
+                              className={
+                                medicine.required_prescription
+                                  ? "text-green-500"
+                                  : "text-gray-400"
+                              }
+                            />
+                            <span>
+                              {medicine.required_prescription
+                                ? "Prescription required"
+                                : "No prescription needed"}
+                            </span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <FaCalendarAlt className="text-gray-400" />
+                            <span>
+                              Exp:{" "}
+                              {new Date(
+                                medicine?.expiry_date as string
+                              ).toLocaleDateString("en-US", {
+                                day: "numeric",
+                                month: "short",
+                                year: "numeric",
+                              })}
+                            </span>
+                          </div>
+                        </div>
                       </div>
                     </Link>
-                    <button
-                      className="btns"
-                      onClick={() =>
-                        handelCard({
-                          _id: medicine._id,
-                          discountPercentage:
-                            medicine.discountPercentage as number,
-                          name: medicine.name,
-                          price: medicine.price,
-                          stock_availability: medicine.stock_availability,
-                          required_prescription: medicine.required_prescription,
-                          quantity: 1,
-                        })
-                      }
-                    >
-                      Add To Card
-                    </button>
+
+                    {/* Add to Cart Button */}
+                    <div className="px-4 pb-4">
+                      <button
+                        onClick={(e) => {
+                          e.preventDefault();
+                          handelCard({
+                            _id: medicine._id,
+                            discountPercentage:
+                              medicine.discountPercentage as number,
+                            name: medicine.name,
+                            price: medicine.price,
+                            stock_availability: medicine.stock_availability,
+                            required_prescription:
+                              medicine.required_prescription,
+                            quantity: 1,
+                          });
+                        }}
+                        className="w-full py-2 bg-[var(--primary-color)] hover:bg-[var(--primary-dark)] text-white font-medium rounded-lg transition-colors duration-200 flex items-center justify-center gap-2"
+                      >
+                        <FaCartPlus />
+                        Add To Cart
+                      </button>
+                    </div>
                   </div>
                 ))}
               </div>

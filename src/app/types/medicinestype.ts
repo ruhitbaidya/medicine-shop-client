@@ -28,7 +28,7 @@ export type TUserIn = {
 export type TCard = {
   _id?: string;
   id: string;
-  discount : boolean;
+  discount: boolean;
   name: string;
   price: string | number;
   stock_availability: string | number;
@@ -72,4 +72,13 @@ export type TOrder = {
   orderId: string;
   shippingAddress: ShippingAddrse | null;
   user: string | undefined;
+};
+
+export type TBlog = {
+  createdAt: string;
+  _id: string;
+  image: string;
+  title: string;
+  description: string;
+  author: string;
 };

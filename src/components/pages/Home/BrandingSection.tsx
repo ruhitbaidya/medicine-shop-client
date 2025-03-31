@@ -27,21 +27,20 @@ const BrandingSection = () => {
         <div className="lg:flex justify-between items-center bannerBG p-[30px] border border-[#4a54e1] rounded-lg">
           {/* Left Section - Text Content */}
           <div className="flex-1">
-            <h1 className="mb-[20px] text-[25px] lg:text-5xl font-bold">
+            <h1 className="mb-[20px] leading-[70px] text-[25px] lg:text-5xl font-bold">
               Your Trusted Online Pharmacy
             </h1>
-            <p className="mb-[20px] lg:mb-[200px]">
+            <p className="mb-[20px]">
               Get high-quality medicines and healthcare products delivered to
               your doorstep.
             </p>
 
             {/* Shop Now Button */}
             <div>
-              <Link
-                href="/shop"
-                className="bg-[#4a54e1] bannerBtn px-[45px] py-[12px] rounded-lg text-white hover:bg-[#3a44d1] transition-colors duration-300"
-              >
-                Shop Now
+              <Link href="/shop" className="cursor-pointer">
+                <button className="bg-[#4a54e1] cursor-pointer bannerBtn px-[45px] py-[15px] rounded-lg text-white hover:bg-[#3a44d1] transition-colors duration-300">
+                  Shop Now
+                </button>
               </Link>
             </div>
           </div>

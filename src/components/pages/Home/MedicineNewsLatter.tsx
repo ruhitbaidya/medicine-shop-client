@@ -28,6 +28,10 @@ const MedicineNewsletter = () => {
       setLoading(false);
       toast.success(res?.message);
       reset();
+    } else {
+      reset();
+      setLoading(false);
+      toast.error(res?.message);
     }
   };
   return (
