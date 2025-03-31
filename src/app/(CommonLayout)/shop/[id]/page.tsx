@@ -7,7 +7,12 @@ import { getApi } from "@/components/api/apiCom";
 import { ContextCreate } from "@/Context/ContextProvide";
 import { FaBangladeshiTakaSign } from "react-icons/fa6";
 import Discount from "@/utils/discountFun";
+import { FaCartPlus } from "react-icons/fa";
+import SocialShareIcons from "@/utils/SocialShareIcons";
+import Image from "next/image";
+import ReviewSection from "@/components/pages/Blogs/ReviewSection";
 const MedicineDetails = () => {
+  const { user } = useContext(ContextCreate);
   const { id } = useParams(); // Get the `id` directly from the dynamic route params
   const { card, setCard } = useContext(ContextCreate);
   const [datas, setDatas] = useState<MedicineFormData | null>(null);
@@ -54,9 +59,11 @@ const MedicineDetails = () => {
   }
 
   const {
+    _id,
     name,
     description,
     price,
+    image,
     stock_availability,
     required_prescription,
     expiry_date,
@@ -70,13 +77,28 @@ const MedicineDetails = () => {
       <div className="container mx-auto px-4">
         <div className="mx-auto bg-white rounded-lg shadow-lg overflow-hidden">
           <div className="p-6 border-b border-gray-200">
-            <h4 className="text-3xl font-bold text-center text-gray-800">
-              {name}
-            </h4>
-            <p className="text-center text-gray-600 mt-2">{description}</p>
-            <div className="flex justify-end items-center">
+            <div>
+              <h4 className="text-3xl font-bold text-center text-gray-800">
+                {name}
+              </h4>
+              <p className="text-gray-600 mt-2">{description}</p>
+            </div>
+            <div className="flex justify-center items-center">
+              <Image
+                src={image as string}
+                width={200}
+                height={200}
+                alt={name as string}
+              />
+            </div>
+            <div className="flex justify-between items-center mt-[20px]">
+              <SocialShareIcons
+                title={name as string}
+                description={description}
+                imageUrl={image}
+              />
               <button
-                className="btns"
+                className="btns flex justify-center items-center gap-[15px]"
                 onClick={() =>
                   handelCard({
                     _id: datas?._id,
@@ -90,7 +112,8 @@ const MedicineDetails = () => {
                 }
                 aria-label="Add to cart"
               >
-                Add To Card
+                <FaCartPlus size={25} />
+                <b>Add To Card</b>
               </button>
             </div>
           </div>
@@ -161,6 +184,8 @@ const MedicineDetails = () => {
           </div>
         </div>
       </div>
+      {/** start comment sections */}
+      {user && <ReviewSection id={_id as string} />}
     </div>
   );
 };

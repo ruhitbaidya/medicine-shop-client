@@ -62,81 +62,81 @@ const BlogsPage = () => {
           <div className="p-4">
             <div className="overflow-x-auto bg-white rounded-lg shadow">
               {loading ? (
-                <>
-                  <div className="flex justify-center items-center">
-                    <Spinner />
-                  </div>
-                </>
+                <div className="flex justify-center items-center p-8">
+                  <Spinner />
+                </div>
               ) : (
-                <>
-                  <table className="min-w-full divide-y divide-gray-200">
-                    <thead className="bg-gray-50">
-                      <tr>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                          Image
-                        </th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                          Title
-                        </th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                          Date
-                        </th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                          Description
-                        </th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                          Actions
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody className="bg-white divide-y divide-gray-200">
-                      {blogs &&
-                        blogs.map((item) => (
-                          <tr key={item?._id} className="hover:bg-gray-50">
-                            <td className="px-6 py-4 whitespace-nowrap">
+                <table className="min-w-full divide-y divide-gray-200 table-fixed">
+                  <thead className="bg-gray-50">
+                    <tr>
+                      <th className="w-[10%] px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Image
+                      </th>
+                      <th className="w-[20%] px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Title
+                      </th>
+                      <th className="w-[15%] px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Date
+                      </th>
+                      <th className="w-[45%] px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Description
+                      </th>
+                      <th className="w-[10%] px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Actions
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody className="bg-white divide-y divide-gray-200">
+                    {blogs &&
+                      blogs.map((item) => (
+                        <tr key={item?._id} className="hover:bg-gray-50">
+                          <td className="w-[10%] px-6 py-4 whitespace-nowrap">
+                            <div className="flex justify-center">
                               <Image
-                                width={200}
-                                height={200}
+                                width={40}
+                                height={40}
                                 src={item?.image}
                                 alt={item?.title}
                                 className="h-10 w-10 rounded-full object-cover"
                               />
-                            </td>
-                            <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                            </div>
+                          </td>
+                          <td className="w-[20%] px-6 py-4 text-sm font-medium text-gray-900">
+                            <div className="whitespace-normal break-words">
                               {item?.title}
-                            </td>
-                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                              {new Date(item?.createdAt).toLocaleDateString()}
-                            </td>
-                            <td className="px-6 py-4 text-sm text-gray-500">
-                              <div className="max-w-xs max-h-20 overflow-y-auto">
-                                {item?.description}
-                              </div>
-                            </td>
-                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                              <div className="flex space-x-4">
-                                <button
-                                  onClick={() => {
-                                    modaluRef.current?.showModal();
-                                    setUpdateDataPass(item);
-                                  }}
-                                  className="bg-[var(--primary-color)] text-white p-[10px] rounded-lg cursor-pointer"
-                                >
-                                  <FiEdit className="h-5 w-5" />
-                                </button>
-                                <button
-                                  onClick={() => handelDelete(item._id)}
-                                  className="bg-[var(--primary-color)] text-white p-[10px] rounded-lg cursor-pointer"
-                                >
-                                  <FiTrash2 className="h-5 w-5" />
-                                </button>
-                              </div>
-                            </td>
-                          </tr>
-                        ))}
-                    </tbody>
-                  </table>
-                </>
+                            </div>
+                          </td>
+                          <td className="w-[15%] px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                            {new Date(item?.createdAt).toLocaleDateString()}
+                          </td>
+                          <td className="w-[45%] px-6 py-4 text-sm text-gray-500">
+                            <div className="whitespace-normal break-words max-h-20 overflow-y-auto">
+                              {item?.description}
+                            </div>
+                          </td>
+                          <td className="w-[10%] px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                            <div className="flex justify-center space-x-4">
+                              <button
+                                onClick={() => {
+                                  modaluRef.current?.showModal();
+                                  setUpdateDataPass(item);
+                                }}
+                                className="bg-[var(--primary-color)] text-white p-2 rounded-lg cursor-pointer"
+                              >
+                                <FiEdit className="h-5 w-5" />
+                              </button>
+                              <button
+                                onClick={() => handelDelete(item._id)}
+                                className="bg-[var(--primary-color)] text-white p-2 rounded-lg cursor-pointer"
+                              >
+                                <FiTrash2 className="h-5 w-5" />
+                              </button>
+                            </div>
+                          </td>
+                        </tr>
+                      ))}
+                  </tbody>
+                </table>
               )}
             </div>
           </div>

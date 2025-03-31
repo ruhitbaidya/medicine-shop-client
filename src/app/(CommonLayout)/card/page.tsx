@@ -154,8 +154,8 @@ const CartPage = () => {
             <h2 className="text-2xl font-semibold text-[var(--primary-color)]">
               Total
             </h2>
-            <span className="text-3xl font-bold text-[var(--primary-color)]">
-              {calculateTotal().toFixed(2)}
+            <span className="text-3xl flex items-center gap-[10px] font-bold text-[var(--primary-color)]">
+              <FaBangladeshiTakaSign /> {calculateTotal().toFixed(2)}
             </span>
           </div>
 

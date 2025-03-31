@@ -33,6 +33,7 @@ const CheckoutForm = () => {
         `${process.env.NEXT_PUBLIC_API_URL}/order`,
         order
       );
+      console.log(res);
       if (res.data) {
         setCard([]);
         router.push("/order");

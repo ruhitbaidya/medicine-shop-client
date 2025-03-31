@@ -10,15 +10,6 @@ import {
   FaFirstAid,
 } from "react-icons/fa";
 
-// First, define your CSS variables (add this to your global CSS file)
-// :root {
-//   --primary-color: #4a54e1;      // Professional blue
-//   --primary-light: #e0e2f8;     // Light blue
-//   --primary-dark: #3a42b8;      // Darker blue
-//   --text-color: #2d3748;        // Dark gray for text
-//   --text-light: #718096;        // Light gray for secondary text
-// }
-
 const medicineCategories = [
   {
     name: "Antibiotics",
@@ -84,7 +75,6 @@ const medicineCategories = [
     borderColor: "border-[var(--primary-color)]",
   },
 ];
-
 const ShopOverview = () => {
   return (
     <section className="py-16 bg-gray-50">
@@ -125,7 +115,6 @@ const ShopOverview = () => {
             </Link>
           ))}
         </div>
-
         {/* View More Button */}
         <div className="text-center mt-12">
           <Link
