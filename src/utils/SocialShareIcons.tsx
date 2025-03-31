@@ -9,12 +9,10 @@ import { IoLogoLinkedin } from "react-icons/io5";
 import { FaSquareWhatsapp, FaSquareTwitter } from "react-icons/fa6";
 import { FaFacebookSquare, FaShareAlt } from "react-icons/fa";
 import { useEffect, useState } from "react";
-import Head from "next/head";
 
 const SocialShareIcons = ({
   title,
   description,
-  imageUrl,
 }: {
   title: string;
   description?: string;
@@ -34,19 +32,6 @@ const SocialShareIcons = ({
 
   return (
     <div className="flex items-center gap-6 p-4 bg-white rounded-lg">
-      <Head>
-        <meta property="og:title" content={title} />
-        <meta property="og:description" content={description} />
-        <meta property="og:url" content={shareUrl} />
-        <meta property="og:type" content="website" />
-        <meta property="og:image" content={imageUrl} />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={title} />
-        <meta name="twitter:description" content={description} />
-        <meta name="twitter:image" content={imageUrl} />
-      </Head>
       <div className="text-gray-600 hover:text-blue-500 transition-colors">
         <FaShareAlt size={28} />
       </div>

@@ -7,6 +7,7 @@ import { TCardFor } from "@/app/types/medicinestype";
 import { FaPlus } from "react-icons/fa";
 import { FaMinus } from "react-icons/fa";
 import Discount from "@/utils/discountFun";
+
 const CartPage = () => {
   const { card, setCard, setCount } = useContext(ContextCreate);
   console.log(card);

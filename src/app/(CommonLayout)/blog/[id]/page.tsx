@@ -1,13 +1,33 @@
 import { getApi } from "@/components/api/apiCom";
 import SocialShareIcons from "@/utils/SocialShareIcons";
+import { Metadata } from "next";
 import Image from "next/image";
+import { notFound } from "next/navigation";
 import { FaCalendarAlt, FaUser } from "react-icons/fa";
-const BlogDetails = async ({ params }: { params: { id: string } }) => {
-  const { id } = params;
+export const metadata: Metadata = {
+  title: "Blog Details",
+  description: "RM-Corner Blogs Details Page",
+};
+interface BlogPost {
+  id: string;
+  title: string;
+  description: string;
+  image: string;
+  author: string;
+  createdAt: string;
+}
+
+const BlogDetails = async ({ params }: { params: Promise<{ id: string }> }) => {
+  const { id } = await params;
+  console.log(id);
   const res = await getApi(
     `${process.env.NEXT_PUBLIC_API_URL}/get-singal-blogs/${id}`
   );
-  const post = res.data;
+
+  if (!res?.data) {
+    return notFound();
+  }
+  const post: BlogPost = res?.data;
   // Mock data structure based on your example
 
   const formatDate = (dateString: string) => {
