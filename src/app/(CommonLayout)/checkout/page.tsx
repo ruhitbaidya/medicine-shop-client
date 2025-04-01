@@ -1,6 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
-import { postApi } from "@/components/api/apiCom";
 import { ContextCreate } from "@/Context/ContextProvide";
 import Image from "next/image";
 import { useRouter } from "next/navigation";

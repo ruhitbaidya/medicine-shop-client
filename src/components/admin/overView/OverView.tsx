@@ -1,6 +1,7 @@
 "use client";
 import { getApi } from "@/components/api/apiCom";
 import { useEffect, useState } from "react";
+import AdminCharts from "../AdminChart/AdminCharts";
 type OverView = {
   pendingOrder: number;
   totalMedicine: number;
@@ -122,6 +123,10 @@ export const OverView = () => {
               </div>
             </div>
           </div>
+        </div>
+        <div className="mt-[15px]">
+          <h2 className="font-bold text-2xl">Chart</h2>
+          <AdminCharts />
         </div>
       </div>
     </div>

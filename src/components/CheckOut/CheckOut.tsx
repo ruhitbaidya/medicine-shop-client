@@ -20,6 +20,7 @@ const CheckoutForm = () => {
       shippingAddress: shippingInfo,
       orderId: oId,
       prescription: imageUrl,
+      payment: count,
     };
     console.log(order);
     setTempOrder({

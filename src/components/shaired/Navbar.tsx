@@ -32,11 +32,13 @@ const Navbar = () => {
 
   return (
     <nav className="bg-white shadow-md fixed top-0 left-0 w-full z-10 overflow-hidden">
-      <div className="container mx-auto px-4 py-[15px] relative">
+      <div className="container mx-auto px-4 py-[5px] relative">
         <div className="flex justify-between items-center h-16">
-          <Link href="/">
-            <Logo />
-          </Link>
+          <div className="mb-[15px]">
+            <Link href="/">
+              <Logo />
+            </Link>
+          </div>
           <div className="md:hidden flex gap-[8px]">
             <CardProfile />
           </div>
@@ -172,137 +174,118 @@ const Navbar = () => {
         <div className={`${meMenu ? "" : "hidden"} mt-[30px]`}>
           <div>
             <div className="grid grid-cols-3 gap-[25px]">
+              {/* Injectable Formulations */}
               <div className="border-l-2 pl-6">
                 <h5 className="font-bold">Injectable Formulations</h5>
                 <ul>
                   <li>
                     <Link
-                      href="/search?name=Intravenous"
+                      href="/search?name=PainRelief"
                       onClick={() => setMeMenu(false)}
                     >
-                      Intravenous (IV) Injections
+                      Pain Relief Injections
                     </Link>
                   </li>
                   <li>
                     <Link
-                      href="/search?name=Intramuscular"
+                      href="/search?name=MigraineRelief"
                       onClick={() => setMeMenu(false)}
                     >
-                      Intramuscular (IM) Injections
+                      Migraine Injections
                     </Link>
                   </li>
                   <li>
                     <Link
-                      href="/search?name=Subcutaneous"
+                      href="/search?name=Intravenous&manufacturer=HealthPro"
                       onClick={() => setMeMenu(false)}
                     >
-                      Subcutaneous (SC) Injections
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="/search?name=Intradermal"
-                      onClick={() => setMeMenu(false)}
-                    >
-                      Intradermal (ID) Injections
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="/search?name=Intrathecal"
-                      onClick={() => setMeMenu(false)}
-                    >
-                      Intrathecal/Spinal Injections
+                      IV Therapy Solutions
                     </Link>
                   </li>
                 </ul>
               </div>
+
+              {/* Topical Formulations */}
               <div className="border-l-2 pl-6">
                 <h5 className="font-bold">Topical Formulations</h5>
                 <ul>
                   <li>
                     <Link
-                      href="/search?name=Ointments"
+                      href="/search?name=ClearSkin"
                       onClick={() => setMeMenu(false)}
                     >
-                      Ointments/Creams
+                      Acne Treatment Creams
                     </Link>
                   </li>
                   <li>
                     <Link
-                      href="/search?name=Gels"
+                      href="/search?name=JointFlex"
                       onClick={() => setMeMenu(false)}
                     >
-                      Gels
+                      Joint Pain Creams
                     </Link>
                   </li>
                   <li>
                     <Link
-                      href="/search?name=Patches"
+                      href="/search?description=inflammation&type=cream"
                       onClick={() => setMeMenu(false)}
                     >
-                      Patches
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="/search?name=EarDrops"
-                      onClick={() => setMeMenu(false)}
-                    >
-                      Eye/Ear Drops
+                      Anti-Inflammatory Gels
                     </Link>
                   </li>
                 </ul>
               </div>
+
+              {/* Other Specialized Forms */}
               <div className="border-l-2 pl-6">
                 <h5 className="font-bold">Other Specialized Forms</h5>
                 <ul>
                   <li>
                     <Link
-                      href="/search?name=Suppositories"
+                      href="/search?name=SleepWell"
                       onClick={() => setMeMenu(false)}
                     >
-                      Suppositories
+                      Sleep Aid Tablets
                     </Link>
                   </li>
                   <li>
                     <Link
-                      href="/search?name=Nebulizer"
+                      href="/search?name=ProBioFlora"
                       onClick={() => setMeMenu(false)}
                     >
-                      Nebulizer Solutions
+                      Probiotic Capsules
                     </Link>
                   </li>
                   <li>
                     <Link
-                      href="/search?name=Implants"
+                      href="/search?name=DiabetesCare"
                       onClick={() => setMeMenu(false)}
                     >
-                      Implants
+                      Blood Sugar Support
                     </Link>
                   </li>
                   <li>
                     <Link
-                      href="/search?name=Powders"
+                      href="/search?name=EnergyBoost"
                       onClick={() => setMeMenu(false)}
                     >
-                      Powders for Reconstitution
+                      Energy Tablets
                     </Link>
                   </li>
                   <li>
                     <Link
-                      href="/search?name=Nasal"
+                      href="/search?name=CoughGuard"
                       onClick={() => setMeMenu(false)}
                     >
-                      Nasal Sprays
+                      Cough Syrups
                     </Link>
                   </li>
                   <li>
                     <Link
-                      href="/search?name=Inhalers"
+                      href="/search?name=StomachEase"
                       onClick={() => setMeMenu(false)}
                     >
-                      Inhalers
+                      Digestive Tablets
                     </Link>
                   </li>
                 </ul>

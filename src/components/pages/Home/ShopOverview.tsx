@@ -13,6 +13,7 @@ import {
 const medicineCategories = [
   {
     name: "Antibiotics",
+    category: "Infection",
     icon: (
       <FaPills className="text-3xl" style={{ color: "var(--primary-color)" }} />
     ),
@@ -21,6 +22,7 @@ const medicineCategories = [
   },
   {
     name: "Cardiac Care",
+    category: "Heart",
     icon: (
       <FaHeartbeat
         className="text-3xl"
@@ -32,6 +34,7 @@ const medicineCategories = [
   },
   {
     name: "Eye Care",
+    category: "Support",
     icon: (
       <FaEyeDropper
         className="text-3xl"
@@ -43,6 +46,7 @@ const medicineCategories = [
   },
   {
     name: "First Aid",
+    category: "health",
     icon: (
       <FaFirstAid
         className="text-3xl"
@@ -54,6 +58,7 @@ const medicineCategories = [
   },
   {
     name: "Capsules",
+    category: "General",
     icon: (
       <FaCapsules
         className="text-3xl"
@@ -64,7 +69,8 @@ const medicineCategories = [
     borderColor: "border-[var(--primary-color)]",
   },
   {
-    name: "Syrups",
+    name: "Syrup",
+    category: "Vitamins",
     icon: (
       <FaPrescriptionBottleAlt
         className="text-3xl"
@@ -75,6 +81,7 @@ const medicineCategories = [
     borderColor: "border-[var(--primary-color)]",
   },
 ];
+
 const ShopOverview = () => {
   return (
     <section className="py-16 bg-gray-50">
@@ -97,7 +104,7 @@ const ShopOverview = () => {
         {/* Medicine Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {medicineCategories.map((category, index) => (
-            <Link href={`/search?name=${category.name}`} key={index}>
+            <Link href={`/search?name=${category.category}`} key={index}>
               <motion.div
                 whileHover={{ y: -5 }}
                 className={`${category.bgColor} rounded-lg overflow-hidden shadow-sm hover:shadow-md border ${category.borderColor} h-full transition-all duration-300 p-6 flex flex-col items-center`}
