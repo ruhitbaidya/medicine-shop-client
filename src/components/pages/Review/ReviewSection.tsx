@@ -3,14 +3,28 @@ import { ContextCreate } from "@/Context/ContextProvide";
 import { useContext, useState } from "react";
 import { Rating as ReactRating } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
+import { postApi } from "@/components/api/apiCom";
+import { toast } from "sonner";
 const ReviewSection = ({ id }: { id: string }) => {
   const { user } = useContext(ContextCreate);
+  const [loading, setLoading] = useState(false);
   const [comment, setComment] = useState<string>("");
   const [rating, setRating] = useState(0);
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    console.log({ comment, rating, pid: id, name: user?.name });
+    setLoading(true);
+    if (id) {
+      const res = await postApi(
+        `${process.env.NEXT_PUBLIC_API_URL}/create-review`,
+        { comment, rating, pid: id, name: user?.name }
+      );
+      if (res.data._id) {
+        setComment("");
+        setRating(0);
+        setLoading(false);
+        toast.success(res.message);
+      }
+    }
   };
   return (
     <div className="mt-[30px] bg-white py-8">
@@ -43,9 +57,13 @@ const ReviewSection = ({ id }: { id: string }) => {
             {/* Submit Button */}
             <button
               type="submit"
-              className=" bg-[#4a54e1] hover:bg-[#4a54e1] text-white font-medium py-3 px-4 rounded-lg transition duration-200"
+              className="cursor-pointer bg-[#4a54e1] hover:bg-[#4a54e1] text-white font-medium py-3 px-4 rounded-lg transition duration-200"
             >
-              Submit Review
+              {loading ? (
+                <span className="loading loading-spinner loading-xs"></span>
+              ) : (
+                "Submit Review"
+              )}
             </button>
           </form>
         </div>

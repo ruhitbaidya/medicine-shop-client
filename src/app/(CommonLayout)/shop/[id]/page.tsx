@@ -2,7 +2,7 @@
 
 import { useContext, useEffect, useState, useCallback } from "react";
 import { useParams } from "next/navigation"; // Import useParams hook
-import { MedicineFormData, TCardFor } from "@/app/types/medicinestype";
+import { MedicineFormData, TCardFor, Tuser } from "@/app/types/medicinestype";
 import { getApi } from "@/components/api/apiCom";
 import { ContextCreate } from "@/Context/ContextProvide";
 import { FaBangladeshiTakaSign } from "react-icons/fa6";
@@ -10,9 +10,10 @@ import Discount from "@/utils/discountFun";
 import { FaCartPlus } from "react-icons/fa";
 import SocialShareIcons from "@/utils/SocialShareIcons";
 import Image from "next/image";
-import ReviewSection from "@/components/pages/Blogs/ReviewSection";
+import ReviewSection from "@/components/pages/Review/ReviewSection";
 const MedicineDetails = () => {
   const { user } = useContext(ContextCreate);
+  const [founUser, setFoundUser] = useState<Tuser | null>(null);
   const { id } = useParams(); // Get the `id` directly from the dynamic route params
   const { card, setCard } = useContext(ContextCreate);
   const [datas, setDatas] = useState<MedicineFormData | null>(null);
@@ -48,7 +49,8 @@ const MedicineDetails = () => {
 
   useEffect(() => {
     getSingalData();
-  }, [getSingalData]);
+    setFoundUser(user);
+  }, [getSingalData, user]);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -185,7 +187,7 @@ const MedicineDetails = () => {
         </div>
       </div>
       {/** start comment sections */}
-      {user && <ReviewSection id={_id as string} />}
+      {founUser && <ReviewSection id={_id as string} />}
     </div>
   );
 };
