@@ -27,7 +27,7 @@ const BrandingSection = () => {
         <div className="lg:flex justify-between items-center bannerBG p-[30px] border border-[#4a54e1] rounded-lg">
           {/* Left Section - Text Content */}
           <div className="flex-1">
-            <h1 className="mb-[20px] leading-[70px] text-[25px] lg:text-5xl font-bold">
+            <h1 className="mb-[20px] leading-[60px] text-[25px] lg:text-5xl font-bold">
               Your Trusted Online Pharmacy
             </h1>
             <p className="mb-[20px]">

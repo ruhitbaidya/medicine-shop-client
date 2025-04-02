@@ -1,8 +1,9 @@
 "use client";
 import { getApi } from "@/components/api/apiCom";
+import { mySkelaton } from "@/utils/Skilaton";
 import { Rating as ReactRating } from "@smastrom/react-rating";
 import { useEffect, useState } from "react";
-
+import "@smastrom/react-rating/style.css";
 type TRating = {
   _id: string;
   comment: string;
@@ -11,17 +12,20 @@ type TRating = {
 };
 const CustomerReviews = () => {
   const [review, setReview] = useState<TRating[] | []>([]);
+  const [loading, setLoading] = useState(false);
   const getReview = async () => {
     const res = await getApi(
       `${process.env.NEXT_PUBLIC_API_URL}/get-all-review`
     );
     if (res.data.length > 0) {
+      setLoading(false);
       setReview(res.data);
     }
     console.log(res);
   };
 
   useEffect(() => {
+    setLoading(true);
     getReview();
   }, []);
   return (
@@ -36,7 +40,13 @@ const CustomerReviews = () => {
             What our customers say about us.
           </p>
         </div>
-
+        {loading ? (
+          <>
+            <div className="grid grid-cols-3 gap-[25px]">{mySkelaton}</div>
+          </>
+        ) : (
+          <></>
+        )}
         {/* Reviews Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {review &&
